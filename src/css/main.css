@@ -5,7 +5,7 @@
 /* Reset styles */
 @import url("./reset.css");
 
-/* Import font */
+/* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Peralta&family=Quicksand:wght@700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* - Variables - */
@@ -23,3 +23,91 @@
 }
 
 /* -- Styling -- */
+
+/* - General - */
+html {
+	width: 100%;
+	height: 100vh;
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: var(--main-font);
+	/* background-color: var(--main-color); */
+	color: var(--font-color);
+	font-size: 18px;
+}
+
+.wrapper {
+	max-width: 1140px;
+	margin: 0 auto;
+}
+
+h1 {
+	font-size: 2.5rem;
+}
+
+nav a {
+	position: relative;
+}
+
+nav a::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(90deg, var(--accent-color) 20%, #a17fe0);
+	opacity: 0;
+	transition: opacity 0.15s;
+}
+
+nav a.active::after {
+	opacity: 1;
+}
+
+/* - Header - */
+
+.header {
+	width: 100%;
+	background-color: var(--dark);
+	padding: 15px 50px;
+}
+
+.header .wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* Logo */
+.logo {
+	font-family: "Peralta", serif;
+	background: linear-gradient(45deg, var(--accent-color) 20%, #a17fe0);
+	background-clip: text;
+	color: transparent;
+}
+
+.logo a {
+	color: transparent;
+}
+
+/* Navbar */
+.header-nav {
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
+}
+
+.header-nav a {
+	color: var(--font-color);
+}
+
+/* - Main - */
+.main {
+	width: 100%;
+	min-height: 100vh;
+}
+
+/* - Footer - */

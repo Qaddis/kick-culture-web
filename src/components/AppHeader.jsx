@@ -1,16 +1,20 @@
+import { NavLink, Link } from "react-router-dom";
+
 const Header = () => {
 	return (
-		<header>
-			<h1 className="logo"></h1>
+		<header className="header">
+			<div className="wrapper">
+				<h1 className="logo">
+					<Link to="/">Kick Culture</Link>
+				</h1>
 
-			<nav className="header-nav">
-				<ul>
-					<li>Home</li>
-					<li>Products</li>
-					<li>About</li>
-					<li>Basket</li>
-				</ul>
-			</nav>
+				<nav className="header-nav">
+					<NavLink to="/">Home</NavLink>
+					<NavLink to="/products">Products</NavLink>
+					<NavLink to="/about">About</NavLink>
+					<NavLink to="/basket">Basket</NavLink>
+				</nav>
+			</div>
 		</header>
 	);
 };
