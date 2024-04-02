@@ -13,10 +13,12 @@
 	--dark: #0b132b;
 	--light: #fafafa;
 	--add: #1c2541;
-	--accent-color: #5bc0be;
+	--mint: #5bc0be;
+	--violet: #a17fe0;
 
 	--main-color: var(--dark);
 	--font-color: var(--light);
+	--accent-color: var(--mint);
 
 	--main-font: "Work Sans", sans-serif;
 	--header-font: "Quicksand", sans-serif;
@@ -58,7 +60,7 @@ nav a::after {
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background: linear-gradient(90deg, var(--accent-color), #a17fe0);
+	background: linear-gradient(90deg, var(--mint), var(--violet));
 	opacity: 0;
 	transition: opacity 0.15s;
 }
@@ -101,6 +103,7 @@ nav a.active {
 	width: 100%;
 	background-color: var(--dark);
 	padding: 15px 50px;
+	border-bottom: 3px solid var(--add);
 }
 
 .header .wrapper {
@@ -112,7 +115,7 @@ nav a.active {
 /* Logo */
 .logo {
 	font-family: "Peralta", serif;
-	background: linear-gradient(45deg, var(--accent-color) 20%, #a17fe0);
+	background: linear-gradient(45deg, var(--accent-color) 20%, var(--violet));
 	background-clip: text;
 	color: transparent;
 }
@@ -123,7 +126,7 @@ nav a.active {
 
 /* Navbar */
 .header-nav a:last-child {
-	background: linear-gradient(45deg, var(--accent-color) 20%, #a17fe0);
+	background: linear-gradient(45deg, var(--accent-color) 20%, var(--violet));
 	padding: 5px 8px;
 	border-radius: 50%;
 	margin-left: 20px;
@@ -150,7 +153,7 @@ nav a.active {
 /* - Main - */
 .main {
 	width: 100%;
-	min-height: 100vh;
+	min-height: calc(100vh - 86px);
 }
 
 /* - Footer - */
