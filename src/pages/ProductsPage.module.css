@@ -40,5 +40,11 @@
 .best,
 .products {
 	width: 100%;
-	margin: 0 25px;
+}
+
+.products {
+	display: flex;
+	justify-content: center;
+	gap: 50px;
+	flex-wrap: wrap;
 }

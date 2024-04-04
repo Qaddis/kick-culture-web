@@ -15,7 +15,7 @@
 
 .card {
 	width: 320px;
-	height: 400px;
+	height: 320px;
 	background-color: var(--add);
 	border-radius: 20px;
 	text-align: center;
@@ -46,13 +46,14 @@
 
 .card__img {
 	position: relative;
-	margin: 30px 0 10px;
-	width: 85%;
+	margin: 60px 0 25px;
+	width: auto;
+	height: 145px;
 	transition: 0.35s all;
 }
 
 .card:hover .card__img {
-	width: 60%;
+	height: 100px;
 }
 
 .card__header {
@@ -64,7 +65,7 @@
 .card__price {
 	position: relative;
 	font-size: 24px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 
 .card__currency {
@@ -78,7 +79,12 @@
 	padding: 10px 25px;
 	background: linear-gradient(45deg, var(--accent-color) 20%, var(--violet));
 	border-radius: 30px;
+	transform: translateY(50%);
 	transition: all 0.2s;
+}
+
+.card:hover .card__button {
+	transform: none;
 }
 
 .card__button:hover {
