@@ -40,8 +40,8 @@
 }
 
 .card:hover::before {
-	transform: skewY(390deg);
-	top: -70%;
+	transform: skewY(360deg);
+	top: -50%;
 }
 
 .card__img {
@@ -54,6 +54,7 @@
 
 .card:hover .card__img {
 	height: 100px;
+	margin-top: 45px;
 }
 
 .card__header {
