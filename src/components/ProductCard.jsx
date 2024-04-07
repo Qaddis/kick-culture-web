@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ title, price, image }) => {
 	return (
@@ -9,7 +10,9 @@ const ProductCard = ({ title, price, image }) => {
 				{price} <span className="card__currency">usd</span>
 			</p>
 			<div>
-				<button className="card__button">More details</button>
+				<Link to={`/product/${title}`} className="card__button">
+					More details
+				</Link>
 				<button title="add to cart" className="card__button">
 					+
 				</button>

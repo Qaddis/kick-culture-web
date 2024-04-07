@@ -1,0 +1,50 @@
+$gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
+
+.product {
+	&.wrapper {
+		margin: 50px auto;
+		height: 100%;
+	}
+
+	&__card {
+		height: 100%;
+		padding: 5px;
+		background: $gradient;
+		border-radius: 20px;
+		box-shadow: 5px 5px 15px rgba($color: #000000, $alpha: 0.6);
+
+		&-content {
+			background-color: var(--dark);
+			border-radius: 18px;
+			padding: 25px;
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+		}
+	}
+
+	&__title {
+		font-size: 2.2rem;
+		text-transform: uppercase;
+		font-family: var(--header-font);
+		background: $gradient;
+		background-clip: text;
+		color: transparent;
+		margin-bottom: 5px;
+	}
+
+	&__image {
+		height: 180px;
+	}
+
+	&__price {
+		color: var(--mint);
+		margin-top: 20px;
+		font-size: 1.8rem;
+	}
+
+	&__currency {
+		color: var(--light);
+		font-size: 1.5rem;
+	}
+}
