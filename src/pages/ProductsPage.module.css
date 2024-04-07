@@ -16,6 +16,12 @@
 .wrapper {
 	max-width: 1140px;
 	margin: 50px auto;
+	transition: all 0.35s;
+}
+
+.wrapper.active {
+	transform: scale(1) !important;
+	opacity: 1 !important;
 }
 
 .h2 {
