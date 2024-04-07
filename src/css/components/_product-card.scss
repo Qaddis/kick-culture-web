@@ -1,0 +1,95 @@
+$dark: #0b132b;
+$light: #fafafa;
+$add: #1c2541;
+$mint: #5bc0be;
+$violet: #a17fe0;
+$gradient: linear-gradient(45deg, $mint 20%, $violet);
+
+$main-font: "Work Sans", sans-serif;
+$header-font: "Quicksand", sans-serif;
+
+.card {
+	width: 320px;
+	height: 320px;
+	background-color: $add;
+	border-radius: 20px;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+
+	position: relative;
+	overflow: hidden;
+
+	&::before {
+		content: "";
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: $gradient;
+		transform: skewY(345deg);
+
+		position: absolute;
+		top: -50%;
+		transition: 0.35s all;
+	}
+
+	&:hover {
+		.card__img {
+			height: 100px;
+			margin-top: 50px;
+		}
+
+		.card__button {
+			transform: none;
+		}
+	}
+
+	&:hover::before {
+		transform: skewY(360deg);
+		top: -50%;
+	}
+
+	&__img {
+		position: relative;
+		margin: 60px 0 25px;
+		width: auto;
+		height: 145px;
+		transition: 0.35s all;
+	}
+
+	&__heading {
+		position: relative;
+		margin-bottom: 10px;
+		font-weight: 700;
+	}
+
+	&__price {
+		position: relative;
+		font-size: 24px;
+		margin-bottom: 15px;
+	}
+
+	&__currency {
+		font-size: 18px;
+	}
+
+	&__button {
+		font-family: $header-font;
+		color: $dark;
+		text-transform: inherit;
+		padding: 10px 25px;
+		background: $gradient;
+		border-radius: 30px;
+		transform: translateY(50%);
+		transition: all 0.2s;
+
+		&:hover {
+			filter: drop-shadow(0 0 10px $mint);
+		}
+
+		&:active {
+			opacity: 0.8;
+			transform: translateY(1px) !important;
+		}
+	}
+}

@@ -1,4 +1,3 @@
-import styles from "./ProductsPage.module.css";
 import { useEffect, useState } from "react";
 
 import ProductCard from "../components/ProductCard";
@@ -21,9 +20,9 @@ const Products = () => {
 	}, []);
 
 	return (
-		<div className={styles.wrapper}>
-			<h2 className={styles.h2}>The best</h2>
-			<section className={styles.best}>
+		<div className="products wrapper">
+			<h2 className="products__heading">The best</h2>
+			<section className="products__best">
 				{popularProducts.map((product) => (
 					<ProductCard
 						key={product.title}
@@ -33,8 +32,8 @@ const Products = () => {
 					/>
 				))}
 			</section>
-			<h2 className={styles.h2}>All products</h2>
-			<section className={styles.products}>
+			<h2 className="products__heading">All products</h2>
+			<section className="products__all">
 				{cards.map((card) => (
 					<ProductCard
 						key={card.title}

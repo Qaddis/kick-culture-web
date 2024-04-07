@@ -1,0 +1,38 @@
+.products {
+	&.wrapper {
+		margin: 50px auto;
+	}
+
+	&__heading {
+		font-size: 2.2rem;
+		color: var(--dark);
+		font-family: var(--header-font);
+		text-align: center;
+		margin-bottom: 15px;
+
+		&:first-child {
+			position: relative;
+
+			&::before {
+				content: "👑";
+				position: absolute;
+				top: -52%;
+				left: 51%;
+				font-size: 1.8rem;
+			}
+		}
+	}
+
+	&__best {
+		margin-bottom: 50px;
+	}
+
+	&__best,
+	&__all {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		gap: 50px;
+		flex-wrap: wrap;
+	}
+}
