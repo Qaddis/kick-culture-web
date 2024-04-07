@@ -4,7 +4,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	position: relative;
 	width: 100%;
 	height: calc(100vh - 86px);
-	background-image: url("/public/landing_image.jpg");
+	background-image: url("/landing_image.jpg");
 	background-size: 100%;
 	background-position: center center;
 	backdrop-filter: blur(20px);

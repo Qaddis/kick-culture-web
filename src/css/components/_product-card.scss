@@ -1,17 +1,9 @@
-$dark: #0b132b;
-$light: #fafafa;
-$add: #1c2541;
-$mint: #5bc0be;
-$violet: #a17fe0;
-$gradient: linear-gradient(45deg, $mint 20%, $violet);
-
-$main-font: "Work Sans", sans-serif;
-$header-font: "Quicksand", sans-serif;
+$gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 
 .card {
 	width: 320px;
 	height: 320px;
-	background-color: $add;
+	background-color: var(--add);
 	border-radius: 20px;
 	text-align: center;
 	text-transform: uppercase;
@@ -73,23 +65,35 @@ $header-font: "Quicksand", sans-serif;
 		font-size: 18px;
 	}
 
+	div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 	&__button {
-		font-family: $header-font;
-		color: $dark;
+		font-family: var(--header-font);
+		color: var(--dark);
 		text-transform: inherit;
-		padding: 10px 25px;
+		padding: 10px 20px;
 		background: $gradient;
 		border-radius: 30px;
 		transform: translateY(50%);
 		transition: all 0.2s;
 
 		&:hover {
-			filter: drop-shadow(0 0 10px $mint);
+			filter: drop-shadow(0 0 10px var(--mint));
 		}
 
 		&:active {
 			opacity: 0.8;
 			transform: translateY(1px) !important;
+		}
+
+		&:last-child {
+			position: absolute;
+			right: 20px;
+			padding: 10px 16px;
 		}
 	}
 }

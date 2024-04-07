@@ -8,7 +8,12 @@ const ProductCard = ({ title, price, image }) => {
 			<p className="card__price">
 				{price} <span className="card__currency">usd</span>
 			</p>
-			<button className="card__button">To cart</button>
+			<div>
+				<button className="card__button">More details</button>
+				<button title="add to cart" className="card__button">
+					+
+				</button>
+			</div>
 		</article>
 	);
 };

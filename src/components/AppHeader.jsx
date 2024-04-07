@@ -12,7 +12,7 @@ const Header = () => {
 					<NavLink to="/">Home</NavLink>
 					<NavLink to="/products">Products</NavLink>
 					<NavLink to="/about">About</NavLink>
-					<NavLink title="to cart" to="/cart">
+					<NavLink title="go to cart" to="/cart">
 						<svg fill="var(--light)">
 							<use xlinkHref="#cart-svg"></use>
 						</svg>
