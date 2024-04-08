@@ -1,4 +1,6 @@
 import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 import { cards } from "../data";
 
 const Product = () => {
@@ -6,7 +8,13 @@ const Product = () => {
 	const product = cards.find((card) => card.title === params.title);
 
 	return (
-		<section className="product wrapper">
+		<motion.section
+			className="product wrapper"
+			initial={{ y: "5%", opacity: 0 }}
+			animate={{ y: 0, opacity: 1 }}
+			exit={{ y: "-5%", opacity: 0, transition: { duration: 0.35 } }}
+			transition={{ delay: 0.35 }}
+		>
 			<Link to="/products" className="product__back-btn">
 				Back
 			</Link>
@@ -24,7 +32,7 @@ const Product = () => {
 					<img src={product.image} className="product__image" />
 				</div>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 

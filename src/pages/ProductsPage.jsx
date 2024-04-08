@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import ProductCard from "../components/ProductCard";
 import { cards } from "../data";
@@ -20,7 +21,13 @@ const Products = () => {
 	}, []);
 
 	return (
-		<div className="products wrapper">
+		<motion.div
+			className="products wrapper"
+			initial={{ y: "5%", opacity: 0 }}
+			animate={{ y: 0, opacity: 1 }}
+			exit={{ y: "-5%", opacity: 0, transition: { duration: 0.35 } }}
+			transition={{ delay: 0.35 }}
+		>
 			<h2 className="products__heading">The best</h2>
 			<section className="products__best">
 				{popularProducts.map((product) => (
@@ -43,7 +50,7 @@ const Products = () => {
 					/>
 				))}
 			</section>
-		</div>
+		</motion.div>
 	);
 };
 

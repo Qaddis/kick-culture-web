@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Home = () => {
 	return (
-		<>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0, transition: { duration: 0.35 } }}
+			transition={{ delay: 0.35 }}
+		>
 			<div className="landing">
 				<div className="wrapper">
 					<div className="short_info">
@@ -30,7 +36,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-		</>
+		</motion.div>
 	);
 };
 
