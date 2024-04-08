@@ -1,11 +1,29 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import ProductCard from "../components/ProductCard";
 import { cards } from "../data";
 
 const Product = () => {
 	const params = useParams();
 	const product = cards.find((card) => card.title === params.title);
+
+	const similar = [];
+	for (let i = 0; i < cards.length; i++) {
+		if (
+			product.title.split(" ")[1] === cards[i].title.split(" ")[1] &&
+			cards[i] !== product
+		) {
+			similar.push(cards[i]);
+		}
+	}
+
+	for (let i = 0; i < cards.length; i++) {
+		if (cards[i].isPopular && cards[i] !== product) {
+			similar.push(cards[i]);
+		}
+	}
+	similar.length = 3;
 
 	return (
 		<motion.section
@@ -33,6 +51,18 @@ const Product = () => {
 					</div>
 					<img src={product.image} className="product__image" />
 				</div>
+			</div>
+
+			<h3 className="product__heading">Maybe you&apos;ll like it</h3>
+			<div className="product__recommended">
+				{similar.map((card) => (
+					<ProductCard
+						key={card.title}
+						title={card.title}
+						price={card.price}
+						image={card.image}
+					/>
+				))}
 			</div>
 		</motion.section>
 	);

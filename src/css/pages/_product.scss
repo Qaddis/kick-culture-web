@@ -99,4 +99,18 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 			transform: translateY(1px);
 		}
 	}
+
+	&__heading {
+		margin: 35px 0 20px;
+		font-family: var(--header-font);
+		font-size: 1.8em;
+		color: var(--dark);
+	}
+
+	&__recommended {
+		display: flex;
+		align-items: center;
+		justify-content: start;
+		gap: 35px;
+	}
 }
