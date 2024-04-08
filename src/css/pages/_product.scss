@@ -9,6 +9,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	&__card {
 		height: 100%;
 		padding: 5px;
+		margin: 15px 0;
 		background: $gradient;
 		border-radius: 20px;
 		box-shadow: 5px 5px 15px rgba($color: #000000, $alpha: 0.6);
@@ -24,7 +25,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	}
 
 	&__title {
-		font-size: 2.2rem;
+		font-size: 2em;
 		text-transform: uppercase;
 		font-family: var(--header-font);
 		background: $gradient;
@@ -40,11 +41,51 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	&__price {
 		color: var(--mint);
 		margin-top: 20px;
-		font-size: 1.8rem;
+		font-size: 1.55em;
 	}
 
 	&__currency {
 		color: var(--light);
-		font-size: 1.5rem;
+		font-size: 0.85em;
+	}
+
+	&__back-btn {
+		display: inline-block;
+		font-size: 1.35em;
+		padding: 10px 20px;
+		border-radius: 10px;
+		border: 3px solid var(--mint);
+		color: var(--mint);
+		transition: all 0.35s;
+
+		&:hover {
+			background: var(--mint);
+			border-color: var(--mint);
+			color: var(--light);
+		}
+
+		&:active {
+			opacity: 0.8;
+			transform: translateY(1px);
+		}
+	}
+
+	&__cart-btn {
+		font-size: 0.85em;
+		background: $gradient;
+		padding: 10px 25px;
+		border-radius: 15px;
+		color: var(--light);
+		margin-right: 20px;
+		transition: all 0.35s;
+
+		&:hover {
+			filter: drop-shadow(0 0 8px var(--mint));
+		}
+
+		&:active {
+			opacity: 0.8;
+			transform: translateY(1px);
+		}
 	}
 }

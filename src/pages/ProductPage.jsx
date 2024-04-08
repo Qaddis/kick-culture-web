@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { cards } from "../data";
 
 const Product = () => {
@@ -7,13 +7,16 @@ const Product = () => {
 
 	return (
 		<section className="product wrapper">
-			<button>Back</button>
+			<Link to="/products" className="product__back-btn">
+				Back
+			</Link>
 			<div className="product__card">
 				<div className="product__card-content">
 					<div className="product__info">
 						<h2 className="product__title">{product.title}</h2>
 						<p className="product__about">Lorem ipsum dolor sit amet.</p>
 						<p className="product__price">
+							<button className="product__cart-btn">To cart</button>
 							{product.price}
 							<span className="product__currency"> usd</span>
 						</p>
@@ -21,7 +24,6 @@ const Product = () => {
 					<img src={product.image} className="product__image" />
 				</div>
 			</div>
-			<button>To cart</button>
 		</section>
 	);
 };
