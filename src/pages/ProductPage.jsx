@@ -19,7 +19,11 @@ const Product = () => {
 	}
 
 	for (let i = 0; i < cards.length; i++) {
-		if (cards[i].isPopular && cards[i] !== product) {
+		if (
+			cards[i].isPopular &&
+			cards[i] !== product &&
+			!similar.includes(cards[i])
+		) {
 			similar.push(cards[i]);
 		}
 	}
