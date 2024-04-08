@@ -16,7 +16,9 @@ const Product = () => {
 			transition={{ delay: 0.35 }}
 		>
 			<Link to="/products" className="product__back-btn">
-				Back
+				<svg fill="var(--mint)">
+					<use xlinkHref="#arrow-svg"></use>
+				</svg>
 			</Link>
 			<div className="product__card">
 				<div className="product__card-content">

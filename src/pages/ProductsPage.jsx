@@ -23,9 +23,9 @@ const Products = () => {
 	return (
 		<motion.div
 			className="products wrapper"
-			initial={{ y: "5%", opacity: 0 }}
+			initial={{ y: "3%", opacity: 0 }}
 			animate={{ y: 0, opacity: 1 }}
-			exit={{ y: "-5%", opacity: 0, transition: { duration: 0.35 } }}
+			exit={{ y: "-3%", opacity: 0, transition: { duration: 0.35 } }}
 			transition={{ delay: 0.35 }}
 		>
 			<h2 className="products__heading">The best</h2>

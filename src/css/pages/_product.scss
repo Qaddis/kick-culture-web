@@ -52,16 +52,25 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	&__back-btn {
 		display: inline-block;
 		font-size: 1.35em;
-		padding: 10px 20px;
+		padding: 10px 20px 6px 16px;
 		border-radius: 10px;
 		border: 3px solid var(--mint);
 		color: var(--mint);
 		transition: all 0.35s;
 
+		svg {
+			width: 40px;
+			height: 35px;
+		}
+
 		&:hover {
 			background: var(--mint);
 			border-color: var(--mint);
 			color: var(--light);
+
+			svg {
+				fill: var(--light);
+			}
 		}
 
 		&:active {
@@ -71,13 +80,15 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	}
 
 	&__cart-btn {
-		font-size: 0.85em;
+		font-size: 0.75em;
 		background: $gradient;
 		padding: 10px 25px;
 		border-radius: 15px;
 		color: var(--light);
 		margin-right: 20px;
 		transition: all 0.35s;
+		text-transform: uppercase;
+		font-family: var(--header-font);
 
 		&:hover {
 			filter: drop-shadow(0 0 8px var(--mint));
