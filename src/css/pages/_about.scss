@@ -1,0 +1,33 @@
+$gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
+
+.about {
+	&.wrapper {
+		margin: 50px auto;
+	}
+
+	&__heading {
+		font-size: 1.92em;
+		color: var(--dark);
+		font-family: var(--header-font);
+		text-align: center;
+		margin-bottom: 15px;
+	}
+
+	a {
+		color: #f1c40f;
+		text-decoration: underline;
+		text-shadow: 0 0 10px #f1c40f;
+	}
+
+	p {
+		color: var(--dark);
+		font-size: 1.2em;
+		text-align: center;
+	}
+
+	.name {
+		background: $gradient;
+		background-clip: text;
+		color: transparent;
+	}
+}
