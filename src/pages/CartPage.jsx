@@ -1,14 +1,46 @@
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+
+import CartCard from "../components/CartCard";
+import { cards } from "../data.js";
 
 const Cart = () => {
+	const cart = useSelector((state) => state.cart);
+
+	let userCart;
+	if (cart.length !== 0) {
+		userCart = [];
+		cart.forEach((product) => {
+			let matchingProduct = cards.find((i) => i.title === product);
+			if (matchingProduct) {
+				userCart.push(matchingProduct);
+			}
+		});
+	} else userCart = "null";
+
 	return (
 		<motion.section
+			className="cart wrapper"
 			initial={{ y: "5%", opacity: 0 }}
 			animate={{ y: 0, opacity: 1 }}
 			exit={{ y: "-5%", opacity: 0, transition: { duration: 0.35 } }}
 			transition={{ delay: 0.35 }}
 		>
-			<h2>Cart Page</h2>
+			<h2 className="cart__heading">Cart Page</h2>
+			<div className="cart__cards">
+				{userCart === "null" ? (
+					<h3 className="cart__null">None</h3>
+				) : (
+					userCart.map((product) => (
+						<CartCard
+							key={product.title}
+							title={product.title}
+							price={product.price}
+							image={product.image}
+						/>
+					))
+				)}
+			</div>
 		</motion.section>
 	);
 };

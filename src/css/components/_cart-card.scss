@@ -1,6 +1,6 @@
 $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 
-.product-card {
+.cart-card {
 	width: 320px;
 	height: 320px;
 	background-color: var(--add);
@@ -17,35 +17,18 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		content: "";
 		display: block;
 		width: 100%;
-		height: 100%;
+		height: 50%;
 		background: $gradient;
-		transform: skewY(345deg);
+		transform: skewY(360deg);
 
 		position: absolute;
-		top: -50%;
 		transition: 0.35s all;
-	}
-
-	&:hover {
-		.product-card__img {
-			height: 100px;
-			margin-top: 50px;
-		}
-
-		.product-card__button {
-			transform: none;
-		}
-	}
-
-	&:hover::before {
-		transform: skewY(360deg);
 	}
 
 	&__img {
 		position: relative;
-		margin: 60px 0 25px;
-		width: auto;
-		height: 145px;
+		margin: 20px 25px 25px;
+		height: 130px;
 		transition: 0.35s all;
 	}
 
@@ -70,7 +53,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	div {
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-evenly;
 	}
 
 	&__button {
@@ -80,7 +63,6 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		padding: 10px 20px;
 		background: $gradient;
 		border-radius: 30px;
-		transform: translateY(50%);
 		transition: all 0.2s;
 
 		&:hover {
@@ -93,20 +75,13 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		}
 
 		&:last-child {
-			position: absolute;
-			right: 20px;
-			padding: 10px 16px;
+			width: 30%;
 		}
 
 		span {
 			display: inline-block;
+			transform: rotateZ(45deg) translateY(-1px);
 			transition: transform 0.2s;
-		}
-
-		&.in-cart {
-			span {
-				transform: rotateZ(45deg) translateY(-1px);
-			}
 		}
 	}
 }
