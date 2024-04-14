@@ -1,33 +1,44 @@
-import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import ProductCard from "../components/ProductCard";
 import { cards } from "../data";
 
 const Product = () => {
+	const navigate = useNavigate();
 	const params = useParams();
 	const product = cards.find((card) => card.title === params.title);
 
-	const similar = [];
-	for (let i = 0; i < cards.length; i++) {
-		if (
-			product.title.split(" ")[1] === cards[i].title.split(" ")[1] &&
-			cards[i] !== product
-		) {
-			similar.push(cards[i]);
-		}
-	}
+	const [similar, setSimilar] = useState([]);
 
-	for (let i = 0; i < cards.length; i++) {
-		if (
-			cards[i].isPopular &&
-			cards[i] !== product &&
-			!similar.includes(cards[i])
-		) {
-			similar.push(cards[i]);
+	useEffect(() => {
+		if (!product) {
+			navigate("/not-found");
+		} else {
+			let simProducts = [];
+			for (let i = 0; i < cards.length; i++) {
+				if (
+					product.title.split(" ")[1] === cards[i].title.split(" ")[1] &&
+					cards[i] !== product
+				) {
+					simProducts.push(cards[i]);
+				}
+			}
+
+			for (let i = 0; i < cards.length; i++) {
+				if (
+					cards[i].isPopular &&
+					cards[i] !== product &&
+					!simProducts.includes(cards[i])
+				) {
+					simProducts.push(cards[i]);
+				}
+			}
+			simProducts.length = 3;
+			setSimilar(simProducts);
 		}
-	}
-	similar.length = 3;
+	}, [product, navigate]);
 
 	return (
 		<motion.section
@@ -43,30 +54,38 @@ const Product = () => {
 				</svg>
 			</Link>
 			<div className="product__card">
-				<div className="product__card-content">
-					<div className="product__info">
-						<h2 className="product__title">{product.title}</h2>
-						<p className="product__about">Lorem ipsum dolor sit amet.</p>
-						<p className="product__price">
-							<button className="product__cart-btn">To cart</button>
-							{product.price}
-							<span className="product__currency"> usd</span>
-						</p>
+				{product ? (
+					<div className="product__card-content">
+						<div className="product__info">
+							<h2 className="product__title">{product.title}</h2>
+							<p className="product__about">Lorem ipsum dolor sit amet.</p>
+							<p className="product__price">
+								<button className="product__cart-btn">To cart</button>
+								{product.price}
+								<span className="product__currency"> usd</span>
+							</p>
+						</div>
+						<img src={product.image} className="product__image" />
 					</div>
-					<img src={product.image} className="product__image" />
-				</div>
+				) : (
+					<h2>None</h2>
+				)}
 			</div>
 
 			<h3 className="product__heading">Maybe you&apos;ll like it</h3>
 			<div className="product__recommended">
-				{similar.map((card) => (
-					<ProductCard
-						key={card.title}
-						title={card.title}
-						price={card.price}
-						image={card.image}
-					/>
-				))}
+				{product ? (
+					similar.map((card) => (
+						<ProductCard
+							key={card.title}
+							title={card.title}
+							price={card.price}
+							image={card.image}
+						/>
+					))
+				) : (
+					<h2>None</h2>
+				)}
 			</div>
 		</motion.section>
 	);
