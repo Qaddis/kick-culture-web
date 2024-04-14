@@ -9,10 +9,6 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	gap: 20px;
 	color: var(--dark);
 
-	&.wrapper {
-		margin: 50px auto;
-	}
-
 	h2 {
 		font-size: 3em;
 		font-family: var(--header-font);

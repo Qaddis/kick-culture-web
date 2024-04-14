@@ -1,14 +1,19 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import Header from "./AppHeader";
 import Footer from "./AppFooter";
 
 const Layout = () => {
+	const path = useLocation().pathname;
+
 	return (
 		<>
 			<Header />
 
-			<main className="main">
+			<main
+				style={path !== "/" ? { paddingTop: 50 } : { padding: 0 }}
+				className="main"
+			>
 				<Outlet />
 			</main>
 

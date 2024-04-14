@@ -8,10 +8,6 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	justify-content: center;
 	gap: 10px;
 
-	&.wrapper {
-		margin: 50px auto;
-	}
-
 	&__heading {
 		font-size: 1.92em;
 		color: var(--dark);

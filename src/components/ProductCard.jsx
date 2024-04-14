@@ -21,7 +21,7 @@ const ProductCard = ({ title, price, image }) => {
 					More details
 				</Link>
 				<button
-					title="add to cart"
+					title={ifExist ? "remove from cart" : "add to cart"}
 					className={
 						ifExist ? "product-card__button in-cart" : "product-card__button"
 					}
