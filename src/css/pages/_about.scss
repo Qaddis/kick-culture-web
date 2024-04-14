@@ -29,6 +29,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	}
 
 	.name {
+		font-family: "Peralta", serif;
 		background: $gradient;
 		background-clip: text;
 		color: transparent;
