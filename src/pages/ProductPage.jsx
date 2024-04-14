@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { useActions } from "../hooks/useActions";
 
 import ProductCard from "../components/ProductCard";
 import { cards } from "../data";
@@ -8,9 +10,12 @@ import { cards } from "../data";
 const Product = () => {
 	const navigate = useNavigate();
 	const params = useParams();
+	const { toggleProduct } = useActions();
+	const cart = useSelector((state) => state.cart);
 	const product = cards.find((card) => card.title === params.title);
 
 	const [similar, setSimilar] = useState([]);
+	const [ifExist, setIfExist] = useState(false);
 
 	useEffect(() => {
 		if (!product) {
@@ -37,8 +42,9 @@ const Product = () => {
 			}
 			simProducts.length = 3;
 			setSimilar(simProducts);
+			setIfExist(cart.some((i) => i === product.title));
 		}
-	}, [product, navigate]);
+	}, [product, navigate, cart]);
 
 	return (
 		<motion.section
@@ -60,7 +66,14 @@ const Product = () => {
 							<h2 className="product__title">{product.title}</h2>
 							<p className="product__about">Lorem ipsum dolor sit amet.</p>
 							<p className="product__price">
-								<button className="product__cart-btn">To cart</button>
+								<button
+									onClick={() => {
+										toggleProduct(product.title);
+									}}
+									className="product__cart-btn"
+								>
+									{ifExist ? "Remove from cart" : "Add to cart"}
+								</button>
 								{product.price}
 								<span className="product__currency"> usd</span>
 							</p>
