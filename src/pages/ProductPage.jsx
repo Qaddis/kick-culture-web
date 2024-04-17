@@ -93,6 +93,7 @@ const Product = () => {
 							key={card.title}
 							title={card.title}
 							price={card.price}
+							discount={card.discount}
 							image={card.image}
 						/>
 					))

@@ -31,7 +31,7 @@ const Home = () => {
 			<section>
 				{/* eslint-disable-next-line react/no-unknown-property */}
 				<marquee scrollamount="8" behavior="scroll" direction="right">
-					🤩 Discounts up to 25%! 🤩
+					🤩 Discounts up to 20%! 🤩
 				</marquee>
 			</section>
 		</motion.div>

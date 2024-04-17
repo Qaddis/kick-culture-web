@@ -35,6 +35,7 @@ const Products = () => {
 						key={product.title}
 						title={product.title}
 						price={product.price}
+						discount={product.discount}
 						image={product.image}
 					/>
 				))}
@@ -46,6 +47,7 @@ const Products = () => {
 						key={card.title}
 						title={card.title}
 						image={card.image}
+						discount={card.discount}
 						price={card.price}
 					/>
 				))}
