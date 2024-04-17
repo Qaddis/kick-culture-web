@@ -42,6 +42,7 @@ const Cart = () => {
 							key={product.title}
 							title={product.title}
 							price={product.price}
+							discount={product.discount}
 							image={product.image}
 						/>
 					))
