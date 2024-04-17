@@ -63,7 +63,16 @@ const Product = () => {
 				{product ? (
 					<div className="product__card-content">
 						<div className="product__info">
-							<h2 className="product__title">{product.title}</h2>
+							<h2 className="product__title">
+								{product.title}
+								{product.discount !== 0 ? (
+									<span className="product__discount">
+										-{product.discount}%
+									</span>
+								) : (
+									""
+								)}
+							</h2>
 							<p className="product__about">Lorem ipsum dolor sit amet.</p>
 							<p className="product__price">
 								<button
@@ -74,7 +83,15 @@ const Product = () => {
 								>
 									{ifExist ? "Remove from cart" : "Add to cart"}
 								</button>
-								{product.price}
+								{product.discount !== 0 ? (
+									<>
+										<span className="product__old-price">{product.price}</span>
+										{product.price -
+											Math.round(product.price * (product.discount / 100))}
+									</>
+								) : (
+									product.price
+								)}
 								<span className="product__currency"> usd</span>
 							</p>
 						</div>

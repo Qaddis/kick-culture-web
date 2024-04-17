@@ -27,6 +27,18 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		background-clip: text;
 		color: transparent;
 		margin-bottom: 5px;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	&__discount {
+		display: inline-block;
+		font-size: 0.65em;
+		color: var(--dark);
+		background-color: var(--violet);
+		padding: 0 10px;
+		border-radius: 20px;
 	}
 
 	&__image {
@@ -37,6 +49,12 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		color: var(--mint);
 		margin-top: 20px;
 		font-size: 1.55em;
+	}
+
+	&__old-price {
+		margin-right: 10px;
+		text-decoration: line-through;
+		filter: grayscale(0.7);
 	}
 
 	&__currency {
