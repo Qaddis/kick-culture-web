@@ -86,8 +86,9 @@ const Product = () => {
 								{product.discount !== 0 ? (
 									<>
 										<span className="product__old-price">{product.price}</span>
-										{product.price -
-											Math.round(product.price * (product.discount / 100))}
+										{Math.round(
+											product.price - product.price * (product.discount / 100)
+										)}
 									</>
 								) : (
 									product.price

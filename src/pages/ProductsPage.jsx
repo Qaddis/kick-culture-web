@@ -1,24 +1,12 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import ProductCard from "../components/ProductCard";
 import { cards } from "../data";
 
 const Products = () => {
-	const [popularProducts, setPopularProducts] = useState([]);
-
-	const selectedProducts = () => {
-		let products = [];
-		for (let i = 0; i < cards.length; i++) {
-			if (cards[i].isPopular) products.push(cards[i]);
-		}
-
-		return products;
-	};
-
-	useEffect(() => {
-		setPopularProducts(selectedProducts);
-	}, []);
+	let popularProducts = [];
+	for (let i = 0; i < cards.length; i++)
+		if (cards[i].isPopular) popularProducts.push(cards[i]);
 
 	return (
 		<motion.div

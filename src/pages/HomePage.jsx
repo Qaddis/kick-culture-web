@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import ProductCard from "../components/ProductCard";
+import { cards } from "../data";
+
 const Home = () => {
+	let salesProducts = [];
+	for (let i = 0; i < cards.length; i++)
+		if (cards[i].discount !== 0) salesProducts.push(cards[i]);
+
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -28,11 +35,24 @@ const Home = () => {
 				</div>
 			</section>
 
-			<section>
-				{/* eslint-disable-next-line react/no-unknown-property */}
-				<marquee scrollamount="8" behavior="scroll" direction="right">
-					🤩 Discounts up to 20%! 🤩
-				</marquee>
+			{/* eslint-disable-next-line react/no-unknown-property */}
+			<marquee scrollamount="8" behavior="scroll" direction="right">
+				🤩 Discounts up to 20%! 🤩
+			</marquee>
+
+			<section className="sales wrapper">
+				<h2 className="sales__h2">Sales</h2>
+				<div className="cards">
+					{salesProducts.map((product) => (
+						<ProductCard
+							key={product.title}
+							title={product.title}
+							price={product.price}
+							discount={product.discount}
+							image={product.image}
+						/>
+					))}
+				</div>
 			</section>
 		</motion.div>
 	);

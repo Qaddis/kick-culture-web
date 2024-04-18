@@ -3,7 +3,7 @@ export const cards = [
 		image: "/card_1.png",
 		title: "yostep air 3",
 		price: 79.99,
-		discount: 0,
+		discount: 20,
 		isPopular: false,
 	},
 	{
@@ -17,7 +17,7 @@ export const cards = [
 		image: "/card_3.png",
 		title: "yostep ego",
 		price: 89.95,
-		discount: 20,
+		discount: 0,
 		isPopular: false,
 	},
 	{

@@ -82,3 +82,21 @@ marquee {
 	font-size: 1.8em;
 	color: var(--add);
 }
+
+.sales {
+	&__h2 {
+		font-size: 1.92em;
+		color: var(--dark);
+		font-family: var(--header-font);
+		text-align: center;
+		margin: 20px 0 15px;
+	}
+
+	.cards {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		gap: 50px;
+		flex-wrap: wrap;
+	}
+}

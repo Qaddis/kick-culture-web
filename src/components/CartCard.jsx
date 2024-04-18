@@ -22,7 +22,7 @@ const CartCard = ({ title, price, discount, image }) => {
 				{discount !== 0 ? (
 					<>
 						<span className="product__old-price">{price}</span>
-						{price - Math.round(price * (discount / 100))}
+						{Math.round(price - price * (discount / 100))}
 					</>
 				) : (
 					price

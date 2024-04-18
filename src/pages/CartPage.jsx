@@ -20,14 +20,14 @@ const Cart = () => {
 				userCart.push(matchingProduct);
 
 				if (matchingProduct.discount !== 0) {
-					totalPrice +=
+					totalPrice += Math.round(
 						matchingProduct.price -
-						Math.round(
 							matchingProduct.price * (matchingProduct.discount / 100)
-						);
+					);
 					fullPrice += matchingProduct.price;
 					discountPrice += Math.round(
-						matchingProduct.price * (matchingProduct.discount / 100)
+						matchingProduct.price -
+							matchingProduct.price * (matchingProduct.discount / 100)
 					);
 				} else {
 					totalPrice += matchingProduct.price;
@@ -36,6 +36,8 @@ const Cart = () => {
 			}
 		});
 	} else userCart = "null";
+
+	console.log(fullPrice);
 
 	return (
 		<motion.section
@@ -74,7 +76,7 @@ const Cart = () => {
 						<p className="whole-price__discount">
 							<span>Total discount: </span>
 							<span className="percents">
-								{Math.round((discountPrice / fullPrice) * 100)}%
+								{100 - Math.round((discountPrice / fullPrice) * 100)}%
 							</span>
 						</p>
 					) : (

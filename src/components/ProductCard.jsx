@@ -23,7 +23,7 @@ const ProductCard = ({ title, price, discount, image }) => {
 			<img src={image} className="product-card__img" />
 			<h3 className="product-card__heading">{title}</h3>
 			<p className="product-card__price">
-				{discount !== 0 ? price - Math.round(price * (discount / 100)) : price}
+				{discount !== 0 ? Math.round(price - price * (discount / 100)) : price}
 				<span className="product-card__currency"> usd</span>
 			</p>
 			<div>

@@ -11,7 +11,7 @@ const Layout = () => {
 			<Header />
 
 			<main
-				style={path !== "/" ? { paddingTop: 50 } : { padding: 0 }}
+				style={path !== "/" ? { paddingTop: 50 } : { paddingTop: 0 }}
 				className="main"
 			>
 				<Outlet />
