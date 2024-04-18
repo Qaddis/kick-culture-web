@@ -9,12 +9,30 @@ const Cart = () => {
 	const cart = useSelector((state) => state.cart);
 
 	let userCart;
+	let totalPrice = 0;
+	let fullPrice = 0;
+	let discountPrice = 0;
 	if (cart.length !== 0) {
 		userCart = [];
 		cart.forEach((product) => {
 			let matchingProduct = cards.find((i) => i.title === product);
 			if (matchingProduct) {
 				userCart.push(matchingProduct);
+
+				if (matchingProduct.discount !== 0) {
+					totalPrice +=
+						matchingProduct.price -
+						Math.round(
+							matchingProduct.price * (matchingProduct.discount / 100)
+						);
+					fullPrice += matchingProduct.price;
+					discountPrice += Math.round(
+						matchingProduct.price * (matchingProduct.discount / 100)
+					);
+				} else {
+					totalPrice += matchingProduct.price;
+					fullPrice += matchingProduct.price;
+				}
 			}
 		});
 	} else userCart = "null";
@@ -48,6 +66,28 @@ const Cart = () => {
 					))
 				)}
 			</div>
+			{userCart === "null" ? (
+				""
+			) : (
+				<div className="whole-price">
+					{discountPrice !== 0 ? (
+						<p className="whole-price__discount">
+							<span>Total discount: </span>
+							<span className="percents">
+								{Math.round((discountPrice / fullPrice) * 100)}%
+							</span>
+						</p>
+					) : (
+						""
+					)}
+					<p className="whole-price__total">
+						<span>Total price: </span>
+						<span className="currency">
+							{totalPrice} <i>usd</i>
+						</span>
+					</p>
+				</div>
+			)}
 		</motion.section>
 	);
 };

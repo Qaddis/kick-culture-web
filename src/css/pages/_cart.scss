@@ -26,6 +26,43 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		}
 	}
 
+	.whole-price {
+		display: flex;
+		flex-direction: column;
+		row-gap: 25px;
+		margin-top: 50px;
+
+		&__total,
+		&__discount {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			color: var(--add);
+			font-size: 1.4em;
+			font-family: var(--header-font);
+
+			.percents {
+				font-family: var(--main-font);
+				font-weight: 700;
+				color: var(--mint);
+			}
+
+			.currency {
+				font-family: var(--main-font);
+				font-weight: 700;
+				color: var(--violet);
+
+				i {
+					font-size: 0.75em;
+					font-style: normal;
+					font-weight: 500;
+					color: var(--add);
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+
 	&__h3 {
 		font-size: 1.85em;
 		color: var(--add);
