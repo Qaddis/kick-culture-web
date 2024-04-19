@@ -41,7 +41,9 @@ const Home = () => {
 			</marquee>
 
 			<section className="sales wrapper">
-				<h2 className="sales__h2">Sales</h2>
+				<h2 className="sales__h2">
+					<span>Sales</span>
+				</h2>
 				<div className="cards">
 					{salesProducts.map((product) => (
 						<ProductCard

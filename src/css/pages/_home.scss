@@ -90,6 +90,27 @@ marquee {
 		font-family: var(--header-font);
 		text-align: center;
 		margin: 20px 0 15px;
+
+		span {
+			position: relative;
+		}
+
+		span::before {
+			content: "✨";
+			font-size: 0.6em;
+			position: absolute;
+			bottom: -10%;
+			left: -30%;
+			transform: rotate(180deg);
+		}
+
+		span::after {
+			content: "✨";
+			position: absolute;
+			font-size: 0.6em;
+			top: -10%;
+			right: -28%;
+		}
 	}
 
 	.cards {

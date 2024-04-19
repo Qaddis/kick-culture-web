@@ -16,7 +16,10 @@ const Products = () => {
 			exit={{ y: "-3%", opacity: 0, transition: { duration: 0.35 } }}
 			transition={{ delay: 0.35 }}
 		>
-			<h2 className="products__heading">The best</h2>
+			<h2 className="products__heading">
+				<span>The best</span>
+			</h2>
+
 			<section className="products__best">
 				{popularProducts.map((product) => (
 					<ProductCard
