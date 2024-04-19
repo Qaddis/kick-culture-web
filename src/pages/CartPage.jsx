@@ -11,7 +11,6 @@ const Cart = () => {
 	let userCart;
 	let totalPrice = 0;
 	let fullPrice = 0;
-	let discountPrice = 0;
 	if (cart.length !== 0) {
 		userCart = [];
 		cart.forEach((product) => {
@@ -25,10 +24,6 @@ const Cart = () => {
 							matchingProduct.price * (matchingProduct.discount / 100)
 					);
 					fullPrice += matchingProduct.price;
-					discountPrice += Math.round(
-						matchingProduct.price -
-							matchingProduct.price * (matchingProduct.discount / 100)
-					);
 				} else {
 					totalPrice += matchingProduct.price;
 					fullPrice += matchingProduct.price;
@@ -72,11 +67,11 @@ const Cart = () => {
 				""
 			) : (
 				<div className="whole-price">
-					{discountPrice !== 0 ? (
+					{totalPrice !== fullPrice ? (
 						<p className="whole-price__discount">
 							<span>Total discount: </span>
 							<span className="percents">
-								{100 - Math.round((discountPrice / fullPrice) * 100)}%
+								{100 - Math.round((totalPrice / fullPrice) * 100)}%
 							</span>
 						</p>
 					) : (
