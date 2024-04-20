@@ -9,7 +9,7 @@ const About = () => {
 			transition={{ delay: 0.35 }}
 			className="about wrapper"
 		>
-			<h2 className="about__heading">About Page</h2>
+			<h2 className="about__heading">About Us</h2>
 			<p>
 				<b className="name">Kick Culture</b> is not a real store. This is a pet
 				project made by{" "}

@@ -40,7 +40,7 @@ const Cart = () => {
 			exit={{ y: "-5%", opacity: 0, transition: { duration: 0.35 } }}
 			transition={{ delay: 0.35 }}
 		>
-			<h2 className="cart__h2">Cart Page</h2>
+			<h2 className="cart__h2">Cart 🛒</h2>
 			<div className="cart__cards">
 				{userCart === "null" ? (
 					<motion.div
