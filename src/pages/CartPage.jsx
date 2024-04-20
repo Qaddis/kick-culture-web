@@ -32,8 +32,6 @@ const Cart = () => {
 		});
 	} else userCart = "null";
 
-	console.log(fullPrice);
-
 	return (
 		<motion.section
 			className="cart wrapper"
@@ -80,6 +78,11 @@ const Cart = () => {
 					<p className="whole-price__total">
 						<span>Total price: </span>
 						<span className="currency">
+							{fullPrice !== totalPrice ? (
+								<b className="old">{fullPrice}</b>
+							) : (
+								""
+							)}{" "}
 							{totalPrice} <i>usd</i>
 						</span>
 					</p>

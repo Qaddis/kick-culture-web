@@ -40,6 +40,9 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 			color: var(--add);
 			font-size: 1.4em;
 			font-family: var(--header-font);
+			border: 3px dashed var(--dark);
+			border-radius: 10px;
+			padding: 10px;
 
 			.percents {
 				font-family: var(--main-font);
@@ -51,6 +54,12 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 				font-family: var(--main-font);
 				font-weight: 700;
 				color: var(--violet);
+
+				.old {
+					text-decoration: line-through;
+					filter: grayscale(0.6);
+					opacity: 0.6;
+				}
 
 				i {
 					font-size: 0.75em;
