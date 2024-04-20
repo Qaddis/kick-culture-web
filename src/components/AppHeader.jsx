@@ -4,7 +4,7 @@ const Header = () => {
 	return (
 		<header className="header">
 			<div className="wrapper">
-				<h1 className="logo">
+				<h1 className="logo" title="Go to home page">
 					<Link to="/">Kick Culture</Link>
 				</h1>
 
@@ -12,7 +12,7 @@ const Header = () => {
 					<NavLink to="/">Home</NavLink>
 					<NavLink to="/products">Products</NavLink>
 					<NavLink to="/about">About</NavLink>
-					<NavLink title="go to cart" to="/cart">
+					<NavLink title="Go to cart" to="/cart">
 						<svg fill="var(--light)">
 							<use xlinkHref="#cart-svg"></use>
 						</svg>

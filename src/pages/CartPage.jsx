@@ -43,12 +43,17 @@ const Cart = () => {
 			<h2 className="cart__h2">Cart Page</h2>
 			<div className="cart__cards">
 				{userCart === "null" ? (
-					<div className="container">
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ duration: 0.25 }}
+						className="container"
+					>
 						<h3 className="cart__h3">It&apos;s empty here for now ☹️</h3>
 						<Link className="cart__btn" to="/products">
 							To fix this!
 						</Link>
-					</div>
+					</motion.div>
 				) : (
 					userCart.map((product) => (
 						<CartCard
