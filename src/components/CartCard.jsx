@@ -1,12 +1,29 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useActions } from "../hooks/useActions";
+import { motion } from "framer-motion";
 
 const CartCard = ({ title, price, discount, image }) => {
+	const [isVisible, setIsVisible] = useState(true);
 	const { toggleProduct } = useActions();
 
+	const removeFromCart = (product) => {
+		setIsVisible(false);
+		setTimeout(() => {
+			toggleProduct(product);
+		}, 350);
+	};
+
 	return (
-		<article className="cart-card">
+		<motion.article
+			className="cart-card"
+			animate={{
+				opacity: isVisible ? 1 : 0,
+				translateY: isVisible ? 0 : "20%",
+			}}
+			transition={{ duration: 0.25 }}
+		>
 			<div
 				className={
 					discount !== 0
@@ -37,13 +54,13 @@ const CartCard = ({ title, price, discount, image }) => {
 					title="remove from cart"
 					className="cart-card__button"
 					onClick={() => {
-						toggleProduct(title);
+						removeFromCart(title);
 					}}
 				>
 					<span>+</span>
 				</button>
 			</div>
-		</article>
+		</motion.article>
 	);
 };
 
