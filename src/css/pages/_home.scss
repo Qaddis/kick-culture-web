@@ -35,7 +35,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		z-index: 3;
 	}
 
-	&__h1 {
+	&__h2 {
 		font-family: "Peralta", serif;
 		font-size: 2.8em;
 		text-align: center;
@@ -63,18 +63,21 @@ marquee {
 	color: var(--add);
 }
 
+.page-heading {
+	font-size: 1.92em;
+	color: var(--dark);
+	font-family: var(--header-font);
+	text-align: center;
+	margin-top: 20px;
+}
+
 .sales {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	row-gap: 15px;
 
-	&__h2 {
-		font-size: 1.92em;
-		color: var(--dark);
-		font-family: var(--header-font);
-		text-align: center;
-		margin-top: 20px;
+	.page-heading {
 		position: relative;
 
 		&::before {
@@ -101,5 +104,34 @@ marquee {
 		justify-content: center;
 		gap: 50px;
 		flex-wrap: wrap;
+	}
+}
+
+.advantages {
+	.page-heading {
+		margin: 50px 0 15px;
+	}
+
+	&__ul {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 25px;
+	}
+
+	&__li {
+		width: 100%;
+		padding: 20px;
+		background-color: var(--dark);
+		border: 3px solid var(--add);
+		border-radius: 20px;
+	}
+
+	&__h3 {
+		width: auto;
+		font-family: var(--header-font);
+		font-size: 1.5em;
+		color: var(--mint);
+		margin-bottom: 5px;
 	}
 }

@@ -20,7 +20,7 @@ const Home = () => {
 		>
 			<section className="landing">
 				<div className="wrapper">
-					<h2 className="landing__h1">Kick Culture</h2>
+					<h2 className="landing__h2">Kick Culture</h2>
 					<p className="landing__p">
 						Walk in
 						<span style={{ color: "#F06D58" }}> style</span>, breathe in
@@ -43,7 +43,7 @@ const Home = () => {
 			</marquee>
 
 			<section className="sales wrapper">
-				<h2 className="sales__h2">
+				<h2 className="page-heading">
 					<span>Sales</span>
 				</h2>
 				<div className="cards">
@@ -58,8 +58,24 @@ const Home = () => {
 					))}
 				</div>
 				<Link to="/products">
-					<Button style={{ marginTop: "20px" }}>More Products</Button>
+					<Button style={{ marginTop: "20px", padding: "15px 30px" }}>
+						More Products
+					</Button>
 				</Link>
+			</section>
+
+			<section className="advantages wrapper">
+				<h2 className="page-heading">Why Us?</h2>
+
+				<ul className="advantages__ul">
+					<li className="advantages__li">
+						<h3 className="advantages__h3">Quality</h3>
+						<p className="advantages__p">
+							All our products are original and of the highest quality. Each
+							pair is carefully checked by experts.
+						</p>
+					</li>
+				</ul>
 			</section>
 		</motion.div>
 	);

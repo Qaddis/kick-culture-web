@@ -7,7 +7,7 @@ const Button = ({ children, style, onClick, title }) => {
 			title={title}
 			className={classes.button}
 			style={style}
-			onClick={() => onClick()}
+			onClick={() => (onClick ? onClick() : "")}
 		>
 			{children}
 		</button>
