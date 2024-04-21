@@ -16,7 +16,7 @@ export const cards = [
 	{
 		image: "/card_3.png",
 		title: "yostep ego",
-		price: 89.95,
+		price: 89.5,
 		discount: 0,
 		isPopular: false,
 	},

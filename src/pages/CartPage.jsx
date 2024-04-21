@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
+import Button from "../components/UI/GradientButton.jsx";
 import CartCard from "../components/CartCard";
 import { cards } from "../data.js";
-import { Link } from "react-router-dom";
 
 const Cart = () => {
 	const cart = useSelector((state) => state.cart);
@@ -50,8 +51,8 @@ const Cart = () => {
 						className="container"
 					>
 						<h3 className="cart__h3">It&apos;s empty here for now ☹️</h3>
-						<Link className="cart__btn" to="/products">
-							To fix this!
+						<Link to="/products">
+							<Button style={{ padding: "15px 30px" }}>To fix this!</Button>
 						</Link>
 					</motion.div>
 				) : (

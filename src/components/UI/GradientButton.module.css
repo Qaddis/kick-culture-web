@@ -1,0 +1,23 @@
+.button {
+	display: inline-block;
+	background: linear-gradient(45deg, var(--mint) 20%, var(--violet));
+	border-radius: 20px;
+	font-size: 1.35em;
+	font-family: var(--header-font);
+	color: var(--add);
+	padding: 10px 25px;
+	transition: all 0.35s;
+}
+
+.button:hover {
+	filter: drop-shadow(0 0 10px var(--mint));
+}
+
+.button:active {
+	translate: 0 2px;
+	opacity: 0.8;
+}
+
+.button a {
+	color: inherit;
+}

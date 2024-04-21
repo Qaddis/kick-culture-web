@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import Button from "../components/UI/GradientButton";
 import ProductCard from "../components/ProductCard";
 import { cards } from "../data";
 
@@ -8,6 +9,7 @@ const Home = () => {
 	let salesProducts = [];
 	for (let i = 0; i < cards.length; i++)
 		if (cards[i].discount !== 0) salesProducts.push(cards[i]);
+	salesProducts.length = 3;
 
 	return (
 		<motion.div
@@ -29,8 +31,8 @@ const Home = () => {
 						</span>{" "}
 						- in every pair, there&apos;s a history!
 					</p>
-					<Link to="/products" className="landing__button">
-						Shop now!
+					<Link to="/products">
+						<Button style={{ fontSize: "1.5em", opacity: 1 }}>Shop now!</Button>
 					</Link>
 				</div>
 			</section>
@@ -55,6 +57,9 @@ const Home = () => {
 						/>
 					))}
 				</div>
+				<Link to="/products">
+					<Button style={{ marginTop: "20px" }}>More Products</Button>
+				</Link>
 			</section>
 		</motion.div>
 	);

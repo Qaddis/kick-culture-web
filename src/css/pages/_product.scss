@@ -92,27 +92,6 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		}
 	}
 
-	&__cart-btn {
-		font-size: 0.75em;
-		background: $gradient;
-		padding: 10px 25px;
-		border-radius: 15px;
-		color: var(--light);
-		margin-right: 20px;
-		transition: all 0.35s;
-		text-transform: uppercase;
-		font-family: var(--header-font);
-
-		&:hover {
-			filter: drop-shadow(0 0 8px var(--mint));
-		}
-
-		&:active {
-			opacity: 0.8;
-			transform: translateY(1px);
-		}
-	}
-
 	&__heading {
 		margin: 35px 0 20px;
 		font-family: var(--header-font);

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { useActions } from "../hooks/useActions";
 
+import Button from "../components/UI/GradientButton";
 import ProductCard from "../components/ProductCard";
 import { cards } from "../data";
 
@@ -75,14 +76,26 @@ const Product = () => {
 							</h2>
 							<p className="product__about">Lorem ipsum dolor sit amet.</p>
 							<p className="product__price">
-								<button
+								{/* <button
 									onClick={() => {
 										toggleProduct(product.title);
 									}}
 									className="product__cart-btn"
 								>
 									{ifExist ? "Remove from cart" : "Add to cart"}
-								</button>
+								</button> */}
+								<Button
+									onClick={() => {
+										toggleProduct(product.title);
+									}}
+									style={{
+										fontSize: "0.85em",
+										marginRight: 20,
+										color: "var(--light)",
+									}}
+								>
+									{ifExist ? "Remove from cart" : "Add to cart"}
+								</Button>
 								{product.discount !== 0 ? (
 									<>
 										<span className="product__old-price">{product.price}</span>

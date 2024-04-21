@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useActions } from "../hooks/useActions";
 import { motion } from "framer-motion";
 
+import Button from "./UI/GradientButton";
+
 const CartCard = ({ title, price, discount, image }) => {
 	const [isVisible, setIsVisible] = useState(true);
 	const { toggleProduct } = useActions();
@@ -47,18 +49,33 @@ const CartCard = ({ title, price, discount, image }) => {
 				<span className="cart-card__currency">usd</span>
 			</p>
 			<div>
-				<Link to={`/product/${title}`} className="cart-card__button">
-					More details
+				<Link to={`/product/${title}`}>
+					<Button
+						style={{
+							fontSize: "1em",
+							textTransform: "uppercase",
+							color: "var(--light)",
+						}}
+					>
+						More details
+					</Button>
 				</Link>
-				<button
+				<Button
+					style={{ width: "30%", fontSize: "1em", color: "var(--light)" }}
 					title="remove from cart"
-					className="cart-card__button"
 					onClick={() => {
 						removeFromCart(title);
 					}}
 				>
-					<span>+</span>
-				</button>
+					<span
+						style={{
+							display: "inline-block",
+							transform: "rotateZ(45deg) translateY(-1px)",
+						}}
+					>
+						+
+					</span>
+				</Button>
 			</div>
 		</motion.article>
 	);

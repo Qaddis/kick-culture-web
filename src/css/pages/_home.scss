@@ -52,26 +52,6 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		text-align: center;
 		z-index: 4;
 	}
-
-	&__button {
-		display: inline-block;
-		font-size: 1.5em;
-		font-family: var(--header-font);
-		color: var(--add);
-		padding: 10px 25px;
-		background: $gradient;
-		border-radius: 20px;
-		transition: all 0.2s;
-		z-index: 4;
-
-		&:hover {
-			filter: drop-shadow(0 0 12px var(--mint));
-		}
-
-		&:active {
-			transform: translateY(2px);
-		}
-	}
 }
 
 marquee {
@@ -84,18 +64,20 @@ marquee {
 }
 
 .sales {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 15px;
+
 	&__h2 {
 		font-size: 1.92em;
 		color: var(--dark);
 		font-family: var(--header-font);
 		text-align: center;
-		margin: 20px 0 15px;
+		margin-top: 20px;
+		position: relative;
 
-		span {
-			position: relative;
-		}
-
-		span::before {
+		&::before {
 			content: "✨";
 			font-size: 0.6em;
 			position: absolute;
@@ -104,7 +86,7 @@ marquee {
 			transform: rotate(180deg);
 		}
 
-		span::after {
+		&::after {
 			content: "✨";
 			position: absolute;
 			font-size: 0.6em;

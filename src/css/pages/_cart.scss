@@ -77,24 +77,4 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		color: var(--add);
 		font-family: var(--header-font);
 	}
-
-	&__btn {
-		display: inline-block;
-		background: $gradient;
-		padding: 15px 25px;
-		border-radius: 15px;
-		color: var(--add);
-		font-family: var(--header-font);
-		font-size: 1.35em;
-		transition: all 0.35s;
-
-		&:hover {
-			filter: drop-shadow(0 0 10px var(--mint));
-		}
-
-		&:active {
-			transform: translateY(1px);
-			opacity: 0.8;
-		}
-	}
 }
