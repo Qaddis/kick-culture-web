@@ -74,16 +74,8 @@ const Product = () => {
 									""
 								)}
 							</h2>
-							<p className="product__about">Lorem ipsum dolor sit amet.</p>
+							<p className="product__about">{product.description}</p>
 							<p className="product__price">
-								{/* <button
-									onClick={() => {
-										toggleProduct(product.title);
-									}}
-									className="product__cart-btn"
-								>
-									{ifExist ? "Remove from cart" : "Add to cart"}
-								</button> */}
 								<Button
 									onClick={() => {
 										toggleProduct(product.title);
