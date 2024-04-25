@@ -68,13 +68,18 @@ const Home = () => {
 				<h2 className="page-heading">Why Us?</h2>
 
 				<ul className="advantages__ul">
-					<li className="advantages__li">
+					<motion.li
+						className="advantages__li"
+						initial={{ rotateX: 90 }}
+						whileInView={{ rotateX: 0 }}
+						transition={{ type: "spring", duration: 0.55, delay: 0.2 }}
+					>
 						<h3 className="advantages__h3">Quality</h3>
 						<p className="advantages__p">
 							All our products are original and of the highest quality. Each
 							pair is carefully checked by experts.
 						</p>
-					</li>
+					</motion.li>
 				</ul>
 			</section>
 		</motion.div>
