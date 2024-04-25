@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import Button from "../components/UI/GradientButton";
 import ProductCard from "../components/ProductCard";
-import { cards } from "../data";
+import { cards, adventages } from "../data";
 
 const Home = () => {
 	let salesProducts = [];
@@ -68,18 +68,18 @@ const Home = () => {
 				<h2 className="page-heading">Why Us?</h2>
 
 				<ul className="advantages__ul">
-					<motion.li
-						className="advantages__li"
-						initial={{ rotateX: 90 }}
-						whileInView={{ rotateX: 0 }}
-						transition={{ type: "spring", duration: 0.55, delay: 0.2 }}
-					>
-						<h3 className="advantages__h3">Quality</h3>
-						<p className="advantages__p">
-							All our products are original and of the highest quality. Each
-							pair is carefully checked by experts.
-						</p>
-					</motion.li>
+					{adventages.map((item) => (
+						<motion.li
+							className="advantages__li"
+							initial={{ rotateX: 90 }}
+							whileInView={{ rotateX: 0 }}
+							transition={{ type: "spring", duration: 0.55, delay: 0.2 }}
+							key={item.title}
+						>
+							<h3 className="advantages__h3">{item.title}</h3>
+							<p className="advantages__p">{item.description}</p>
+						</motion.li>
+					))}
 				</ul>
 			</section>
 		</motion.div>

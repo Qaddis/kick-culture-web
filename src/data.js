@@ -72,3 +72,21 @@ export const cards = [
 		isPopular: false,
 	},
 ];
+
+export const adventages = [
+	{
+		title: "Quality",
+		description:
+			"All our products are original and of the highest quality. Each pair is carefully checked by experts.",
+	},
+	{
+		title: "Speed",
+		description:
+			"We have 520+ warehouses and distribution centers around the world, which guarantees fast delivery.",
+	},
+	{
+		title: "Omnipresence",
+		description:
+			"520+ warehouses and distribution centers around the world: we deliver to over 120 countries!",
+	},
+];
