@@ -1,6 +1,10 @@
 import { NavLink, Link } from "react-router-dom";
 
+import { useActions } from "../hooks/useActions";
+
 const Header = () => {
+	const { toggleBurger } = useActions();
+
 	return (
 		<header className="header">
 			<div className="wrapper">
@@ -19,7 +23,7 @@ const Header = () => {
 					</NavLink>
 				</nav>
 
-				<button className="round-btn hamburger">
+				<button onClick={() => toggleBurger()} className="round-btn hamburger">
 					<svg fill="var(--light)">
 						<use xlinkHref="#hamburger-svg"></use>
 					</svg>
