@@ -22,6 +22,7 @@ const Product = () => {
 		if (!product) {
 			navigate("/not-found");
 		} else {
+			document.title = `${params.title.toUpperCase()} | Kick Culture`;
 			let simProducts = [];
 			for (let i = 0; i < cards.length; i++) {
 				if (
@@ -45,7 +46,7 @@ const Product = () => {
 			setSimilar(simProducts);
 			setIfExist(cart.some((i) => i === product.title));
 		}
-	}, [product, navigate, cart]);
+	}, [product, navigate, cart, params]);
 
 	return (
 		<motion.section

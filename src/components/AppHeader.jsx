@@ -12,12 +12,18 @@ const Header = () => {
 					<NavLink to="/">Home</NavLink>
 					<NavLink to="/products">Products</NavLink>
 					<NavLink to="/about">About</NavLink>
-					<NavLink title="Go to cart" to="/cart">
+					<NavLink className="round-btn" title="Go to cart" to="/cart">
 						<svg fill="var(--light)">
 							<use xlinkHref="#cart-svg"></use>
 						</svg>
 					</NavLink>
 				</nav>
+
+				<button className="round-btn hamburger">
+					<svg fill="var(--light)">
+						<use xlinkHref="#hamburger-svg"></use>
+					</svg>
+				</button>
 			</div>
 		</header>
 	);

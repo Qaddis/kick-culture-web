@@ -7,6 +7,7 @@ import CartCard from "../components/CartCard";
 import { cards } from "../data.js";
 
 const Cart = () => {
+	document.title = "Cart | Kick Culture";
 	const cart = useSelector((state) => state.cart);
 
 	let userCart;

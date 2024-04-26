@@ -4,6 +4,8 @@ import ProductCard from "../components/ProductCard";
 import { cards } from "../data";
 
 const Products = () => {
+	document.title = "Products | Kick Culture";
+
 	let popularProducts = [];
 	for (let i = 0; i < cards.length; i++)
 		if (cards[i].isPopular) popularProducts.push(cards[i]);

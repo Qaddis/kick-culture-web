@@ -6,6 +6,8 @@ import ProductCard from "../components/ProductCard";
 import { cards, adventages } from "../data";
 
 const Home = () => {
+	document.title = "Home | Kick Culture";
+
 	let salesProducts = [];
 	for (let i = 0; i < cards.length; i++)
 		if (cards[i].discount !== 0) salesProducts.push(cards[i]);

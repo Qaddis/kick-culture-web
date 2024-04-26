@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 
 const About = () => {
+	document.title = "About | Kick Culture";
+
 	return (
 		<motion.section
 			initial={{ y: "5%", opacity: 0 }}

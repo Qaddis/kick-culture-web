@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const NotFound = () => {
+	document.title = "Not Found | Kick Culture";
+
 	return (
 		<motion.section
 			className="not-found wrapper"
