@@ -125,3 +125,35 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		}
 	}
 }
+
+/* -- Adaptive -- */
+
+@media (max-width: 375px) {
+	.product-card {
+		div {
+			justify-content: space-around;
+			gap: 5px;
+			padding: 0 10px;
+		}
+
+		&__heading {
+			padding: 0 5px;
+			line-height: 0.9;
+		}
+
+		&__img {
+			height: 125px;
+			width: auto;
+		}
+
+		&__button {
+			text-wrap: nowrap;
+			transform: translateY(100%);
+		}
+
+		&__button:last-child {
+			position: initial;
+			width: 30%;
+		}
+	}
+}

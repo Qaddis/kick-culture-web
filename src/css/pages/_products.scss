@@ -32,3 +32,19 @@
 		flex-wrap: wrap;
 	}
 }
+
+/* -- Adaptive -- */
+
+@media (max-width: 768px) {
+	.products {
+		&__heading {
+			margin-bottom: 35px;
+		}
+
+		&__best,
+		&__all {
+			padding: 0 25px;
+			gap: 35px;
+		}
+	}
+}
