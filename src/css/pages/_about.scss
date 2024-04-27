@@ -7,6 +7,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
+	padding: 0 25px;
 
 	&__heading {
 		font-size: 1.92em;
@@ -33,5 +34,11 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		background: $gradient;
 		background-clip: text;
 		color: transparent;
+	}
+}
+
+@media (max-width: 768px) {
+	.about {
+		gap: 20px;
 	}
 }
