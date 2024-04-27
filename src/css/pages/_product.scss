@@ -49,6 +49,8 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		color: var(--mint);
 		margin-top: 20px;
 		font-size: 1.55em;
+		display: flex;
+		align-items: center;
 	}
 
 	&__old-price {
@@ -103,6 +105,96 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		display: flex;
 		align-items: center;
 		justify-content: start;
+		flex-wrap: wrap;
 		gap: 35px;
+	}
+}
+
+/* -- Adaptive -- */
+
+@media (max-width: 1175px) {
+	.product {
+		&.wrapper {
+			padding: 0 35px;
+		}
+
+		&__recommended {
+			justify-content: center;
+		}
+
+		&__heading {
+			text-align: center;
+			margin-bottom: 25px;
+		}
+	}
+}
+
+@media (max-width: 932px) {
+	.product {
+		&__card-content {
+			flex-direction: column-reverse;
+			gap: 10px;
+		}
+	}
+}
+
+@media (max-width: 540px) {
+	.product {
+		&__image {
+			width: 80%;
+			height: auto;
+		}
+
+		&__price {
+			display: flex;
+			flex-direction: column-reverse;
+			row-gap: 10px;
+
+			button {
+				min-width: 80%;
+				margin: 0 !important;
+				text-wrap: nowrap;
+			}
+		}
+
+		&__about {
+			text-align: center;
+		}
+
+		&__title {
+			flex-direction: column;
+			justify-content: center;
+			gap: 5px;
+			margin-bottom: 10px;
+		}
+
+		&__name {
+			text-align: center;
+			line-height: 0.85;
+		}
+	}
+}
+
+@media (max-width: 425px) {
+	.product {
+		&__price {
+			button {
+				width: 100%;
+				text-wrap: wrap;
+			}
+		}
+
+		&__name {
+			font-size: 0.85em;
+		}
+
+		&__discount {
+			font-size: 0.5em;
+		}
+
+		&__image {
+			width: 100%;
+			margin-bottom: 20px;
+		}
 	}
 }

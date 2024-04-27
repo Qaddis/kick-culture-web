@@ -66,7 +66,7 @@ const Product = () => {
 					<div className="product__card-content">
 						<div className="product__info">
 							<h2 className="product__title">
-								{product.title}
+								<span className="product__name">{product.title}</span>
 								{product.discount !== 0 ? (
 									<span className="product__discount">
 										-{product.discount}%
@@ -76,7 +76,7 @@ const Product = () => {
 								)}
 							</h2>
 							<p className="product__about">{product.description}</p>
-							<p className="product__price">
+							<div className="product__price">
 								<Button
 									onClick={() => {
 										toggleProduct(product.title);
@@ -89,18 +89,22 @@ const Product = () => {
 								>
 									{ifExist ? "Remove from cart" : "Add to cart"}
 								</Button>
-								{product.discount !== 0 ? (
-									<>
-										<span className="product__old-price">{product.price}</span>
-										{Math.round(
-											product.price - product.price * (product.discount / 100)
-										)}
-									</>
-								) : (
-									product.price
-								)}
-								<span className="product__currency"> usd</span>
-							</p>
+								<p>
+									{product.discount !== 0 ? (
+										<>
+											<span className="product__old-price">
+												{product.price}
+											</span>
+											{Math.round(
+												product.price - product.price * (product.discount / 100)
+											)}
+										</>
+									) : (
+										product.price
+									)}
+									<span className="product__currency"> usd</span>
+								</p>
+							</div>
 						</div>
 						<img src={product.image} className="product__image" />
 					</div>
