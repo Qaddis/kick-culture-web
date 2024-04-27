@@ -60,9 +60,7 @@ const Home = () => {
 					))}
 				</div>
 				<Link to="/products">
-					<Button style={{ marginTop: "20px", padding: "15px 30px" }}>
-						More Products
-					</Button>
+					<Button style={{ padding: "15px 30px" }}>More Products</Button>
 				</Link>
 			</section>
 

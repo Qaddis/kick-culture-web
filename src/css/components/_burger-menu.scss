@@ -12,7 +12,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 
 	&__content {
 		height: 100%;
-		width: 35%;
+		width: 45%;
 		background-color: var(--dark);
 		border-left: 3px solid var(--add);
 		padding: 50px 10px;
@@ -30,6 +30,8 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 		color: transparent;
 		background: $gradient;
 		background-clip: text;
+		text-align: center;
+		line-height: 0.85;
 	}
 
 	&__nav {
@@ -73,5 +75,19 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 				opacity: 0.8;
 			}
 		}
+	}
+}
+
+/* -- Adaptive -- */
+
+@media (max-width: 425px) {
+	.burger-menu__content {
+		width: 65%;
+	}
+}
+
+@media (max-width: 375px) {
+	.burger-menu__content {
+		width: 75%;
 	}
 }

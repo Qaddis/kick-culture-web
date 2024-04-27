@@ -22,11 +22,13 @@ export const BurgerMenu = () => {
 	};
 
 	const goToPage = (page) => {
-		setIsAnimationPlay(!isAnimationPlay);
-		setTimeout(() => {
-			toggleBurger();
-			navigate(page);
-		}, 350);
+		if (page !== path) {
+			setIsAnimationPlay(!isAnimationPlay);
+			setTimeout(() => {
+				toggleBurger();
+				navigate(page);
+			}, 300);
+		}
 	};
 
 	return (

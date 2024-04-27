@@ -25,8 +25,7 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 	}
 
 	.wrapper {
-		max-width: 50%;
-		padding: 35px;
+		padding: 35px 50px;
 
 		display: flex;
 		flex-direction: column;
@@ -104,10 +103,14 @@ marquee {
 		justify-content: center;
 		gap: 50px;
 		flex-wrap: wrap;
+		margin-bottom: 20px;
+		padding: 0 25px;
 	}
 }
 
 .advantages {
+	padding: 0 30px;
+
 	.page-heading {
 		margin: 50px 0 15px;
 	}
@@ -133,5 +136,26 @@ marquee {
 		font-size: 1.5em;
 		color: var(--mint);
 		margin-bottom: 5px;
+	}
+}
+
+/* -- Adaptive -- */
+@media (max-width: 600px) {
+	.sales {
+		.page-heading {
+			margin-bottom: 20px;
+		}
+
+		.cards {
+			gap: 35px !important;
+		}
+	}
+}
+
+@media (max-width: 425px) {
+	.landing {
+		.wrapper {
+			padding: 25px;
+		}
 	}
 }
