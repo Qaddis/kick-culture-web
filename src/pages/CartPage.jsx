@@ -7,7 +7,6 @@ import CartCard from "../components/CartCard";
 import { cards } from "../data.js";
 
 const Cart = () => {
-	document.title = "Cart | Kick Culture";
 	const cart = useSelector((state) => state.cart);
 
 	let userCart;
@@ -33,6 +32,10 @@ const Cart = () => {
 			}
 		});
 	} else userCart = "null";
+
+	setTimeout(() => {
+		document.title = "Cart | Kick Culture";
+	}, 350);
 
 	return (
 		<motion.section

@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const NotFound = () => {
-	document.title = "Not Found | Kick Culture";
+	setTimeout(() => {
+		document.title = "Not Found | Kick Culture";
+	}, 350);
 
 	return (
 		<motion.section

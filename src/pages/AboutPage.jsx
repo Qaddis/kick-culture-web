@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 
 const About = () => {
-	document.title = "About | Kick Culture";
+	setTimeout(() => {
+		document.title = "About | Kick Culture";
+	}, 350);
 
 	return (
 		<motion.section
