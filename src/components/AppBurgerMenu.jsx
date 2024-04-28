@@ -52,24 +52,36 @@ export const BurgerMenu = () => {
 						className={path === "/" ? "active" : ""}
 						onClick={() => goToPage("/")}
 					>
+						<svg className="burger-menu__icon">
+							<use xlinkHref="#home-svg"></use>
+						</svg>
 						Home
 					</button>
 					<button
 						className={path === "/products" ? "active" : ""}
 						onClick={() => goToPage("/products")}
 					>
+						<svg className="burger-menu__icon">
+							<use xlinkHref="#products-svg"></use>
+						</svg>
 						Products
 					</button>
 					<button
 						className={path === "/about" ? "active" : ""}
 						onClick={() => goToPage("/about")}
 					>
+						<svg className="burger-menu__icon">
+							<use xlinkHref="#about-svg"></use>
+						</svg>
 						About us
 					</button>
 					<button
 						className={path === "/cart" ? "active" : ""}
 						onClick={() => goToPage("/cart")}
 					>
+						<svg className="burger-menu__icon">
+							<use xlinkHref="#cart-svg"></use>
+						</svg>
 						Cart
 					</button>
 				</nav>

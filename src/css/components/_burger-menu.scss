@@ -46,6 +46,9 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 			font-size: 1.1em;
 			transition: 0.35s all;
 			position: relative;
+			display: flex;
+			align-items: center;
+			column-gap: 5px;
 
 			&.active {
 				opacity: 1 !important;
@@ -69,12 +72,23 @@ $gradient: linear-gradient(45deg, var(--mint) 20%, var(--violet));
 
 			&:hover {
 				color: var(--mint);
+
+				svg {
+					fill: var(--mint);
+				}
 			}
 
-			&:active {
+			&:active,
+			svg {
 				opacity: 0.8;
 			}
 		}
+	}
+
+	&__icon {
+		width: 25px;
+		height: 25px;
+		fill: var(--light);
 	}
 }
 
