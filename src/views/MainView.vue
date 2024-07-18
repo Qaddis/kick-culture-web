@@ -1,0 +1,7 @@
+<script setup lang="ts"></script>
+
+<template>
+	<h1>Main page!</h1>
+</template>
+
+<styles scoped></styles>

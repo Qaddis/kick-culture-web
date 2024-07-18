@@ -1,0 +1,33 @@
+/* - Preparing for styling - */
+
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Peralta&family=Quicksand:wght@700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* Reset default styles */
+@import "reset";
+
+/* Variables */
+:root {
+	--dark: #0b132b;
+	--light: #fafafa;
+	--add: #1c2541;
+	--mint: #5bc0be;
+	--violet: #a17fe0;
+
+	--gradient: linear-gradient(45deg, var(--mint) 10%, var(--violet));
+
+	--main-font: "Work Sans", sans-serif;
+	--header-font: "Quicksand", sans-serif;
+}
+
+/* - Styling - */
+html {
+	scroll-behavior: smooth;
+	font-size: 18px;
+}
+
+body {
+	font-family: var(--main-font);
+	background-color: var(--light);
+	color: var(--light);
+}
