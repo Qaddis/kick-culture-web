@@ -12,7 +12,11 @@ const goToCartPage = (): void => {
 <template>
 	<header class="header">
 		<div class="wrapper">
-			<h1 class="logo"><RouterLink to="/">Kick Culture</RouterLink></h1>
+			<h1 class="logo">
+				<RouterLink title='Go to the "Home" page' to="/"
+					>Kick Culture</RouterLink
+				>
+			</h1>
 
 			<nav class="nav">
 				<RouterLink
@@ -21,6 +25,7 @@ const goToCartPage = (): void => {
 						'nav-link--active': route.fullPath === '/'
 					}"
 					to="/"
+					title='Go to the "Home" page'
 					>Home</RouterLink
 				>
 				<RouterLink
@@ -29,6 +34,7 @@ const goToCartPage = (): void => {
 						'nav-link--active': route.fullPath === '/products'
 					}"
 					to="/products"
+					title='Go to the "Products" page'
 					>Products</RouterLink
 				>
 				<RouterLink
@@ -36,12 +42,17 @@ const goToCartPage = (): void => {
 						'nav-link': true,
 						'nav-link--active': route.fullPath === '/about'
 					}"
+					title='Go to the "About" page'
 					to="/about"
 				>
 					About
 				</RouterLink>
 
-				<button @click="goToCartPage" class="cart-button">
+				<button
+					@click="goToCartPage"
+					title='Go to the "Cart" page'
+					class="cart-button"
+				>
 					<svg>
 						<use xlink:href="#cart-svg"></use>
 					</svg>
