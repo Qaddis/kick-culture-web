@@ -157,7 +157,7 @@ const goToCartPage = (): void => {
 
 .cart-button {
 	background: var(--gradient);
-	padding: 10px 13px;
+	padding: 5px 8px;
 	border-radius: 50%;
 	margin-left: 15px;
 	transition-property: box-shadow, translate, opacity;

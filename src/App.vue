@@ -8,9 +8,7 @@ import Header from "./components/AppHeader.vue"
 	<Header />
 
 	<main class="main">
-		<div class="wrapper">
-			<RouterView />
-		</div>
+		<RouterView />
 	</main>
 
 	<Footer />
@@ -18,12 +16,7 @@ import Header from "./components/AppHeader.vue"
 
 <style scoped>
 .main {
-	margin: 35px 0;
-	padding: 0 25px;
-}
-
-.wrapper {
-	max-width: 1140px;
-	margin: 0 auto;
+	width: 100%;
+	min-height: calc(100vh - 98px);
 }
 </style>
