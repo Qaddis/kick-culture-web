@@ -34,7 +34,7 @@ const handleClick = () => {
 	font-family: var(--header-font);
 	font-size: 1.35rem;
 	color: var(--add);
-	padding: 5px 25px;
+	padding: 10px 25px;
 	transition-property: box-shadow, translate, opacity;
 	transition-duration: 0.2s;
 

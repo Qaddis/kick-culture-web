@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Heading from "../components/ui/Heading.vue"
+</script>
 
 <template>
-	<h1>Cart Page</h1>
+	<Heading text="Cart" />
 </template>
 
 <style scoped lang="scss"></style>

@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Heading from "../components/ui/Heading.vue"
+</script>
 
 <template>
-	<h1>About Page</h1>
+	<Heading text="About us" />
 </template>
 
 <style scoped></style>

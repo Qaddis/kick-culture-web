@@ -17,6 +17,6 @@ import Header from "./components/AppHeader.vue"
 <style scoped>
 .main {
 	width: 100%;
-	min-height: calc(100vh - 98px);
+	min-height: calc(100vh - 96px);
 }
 </style>
