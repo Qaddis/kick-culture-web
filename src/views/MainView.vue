@@ -14,14 +14,14 @@ const goTo = (to: string): void => {
 		<div class="wrapper">
 			<h2 class="landing__h2">Kick Culture</h2>
 			<p class="landing__p">
-				Walk in <span>style</span>, breathe in <span>culture</span>
+				Walk in <span>style</span>, breathe in <span>culture</span>:
 				<br />
 				<span>Kick Culture</span> - in every pair, there&apos;s a history!
 			</p>
 
 			<GradientButton
 				@click="goTo('/products')"
-				style="font-size: 1.5rem; z-index: 3"
+				style="font-size: 1.5rem; z-index: 3; padding: 10px 25px"
 				label="Shop now!"
 			/>
 		</div>
@@ -64,10 +64,23 @@ const goTo = (to: string): void => {
 
 	&__p {
 		font-size: 1.1rem;
-		margin: 25px 0 50px;
+		margin: 10px 0 25px;
 		color: var(--light);
 		text-align: center;
 		z-index: 3;
+
+		span:first-child {
+			color: #f06d58;
+		}
+
+		span:nth-child(2) {
+			color: #fced76;
+		}
+
+		span:last-child {
+			color: var(--violet);
+			text-shadow: 0 0 5px var(--violet);
+		}
 	}
 }
 
