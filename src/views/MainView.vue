@@ -55,6 +55,19 @@ sales.length = 3
 			<GradientButton @click="goTo('/products')" label="More Products" />
 		</div>
 	</section>
+
+	<section class="advantages">
+		<div class="wrapper">
+			<Heading text="Why us?" />
+
+			<ul class="advantages__ul">
+				<li v-for="item in store.advantages" class="advantages__li">
+					<h3>{{ item.briefly }}</h3>
+					<p>{{ item.details }}</p>
+				</li>
+			</ul>
+		</div>
+	</section>
 </template>
 
 <style scoped lang="scss">
@@ -139,7 +152,7 @@ sales.length = 3
 
 .sales {
 	width: 100%;
-	padding: 20px 25px;
+	padding: 50px 25px 25px;
 
 	.wrapper {
 		display: flex;
@@ -176,5 +189,40 @@ sales.length = 3
 	gap: 50px;
 	flex-wrap: wrap;
 	margin: 20px 0 35px;
+}
+
+.advantages {
+	width: 100%;
+	padding: 25px 25px 50px;
+
+	h2 {
+		margin-bottom: 20px;
+	}
+
+	&__ul {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 25px;
+	}
+
+	&__li {
+		width: 100%;
+		padding: 20px;
+		background-color: var(--dark);
+		border: 3px solid var(--violet);
+		border-radius: 20px;
+
+		h3 {
+			font-family: var(--header-font);
+			font-size: 1.5em;
+			color: var(--mint);
+			margin-bottom: 5px;
+		}
+
+		p {
+			color: var(--light);
+		}
+	}
 }
 </style>

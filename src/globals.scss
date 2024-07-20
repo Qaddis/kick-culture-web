@@ -29,5 +29,8 @@ html {
 body {
 	font-family: var(--main-font);
 	background-color: var(--light);
+	background-image: url("./assets/sneaker.svg");
+	background-size: 4.5rem;
+	background-repeat: space;
 	color: var(--dark);
 }

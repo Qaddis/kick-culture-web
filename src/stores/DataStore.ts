@@ -108,20 +108,6 @@ const adv: IAdvantages[] = [
 	}
 ]
 
-// export const productsStore = defineStore({
-// 	id: "data",
-// 	state: () => ({
-// 		products: cards,
-// 		advantages: adv
-// 	}),
-// 	getters: {
-// 		salesProducts: state =>
-// 			state.products.filter(product => product.discount !== 0),
-// 		popularProducts: state =>
-// 			state.products.filter(products => products.isPopular)
-// 	}
-// })
-
 export const siteDataStore = defineStore("siteData", () => {
 	const products = ref(cards)
 	const advantages = ref(adv)
