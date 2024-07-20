@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { computed, ref } from "vue"
 
-interface ICard {
+export interface ICard {
 	title: string
 	description: string
 	image: string

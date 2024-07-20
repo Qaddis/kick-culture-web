@@ -1,12 +1,13 @@
-import { createMemoryHistory, createRouter } from "vue-router"
+import { createRouter, createWebHistory } from "vue-router"
 
 import AboutView from "./views/About.View.vue"
 import CartView from "./views/CartView.vue"
 import MainView from "./views/MainView.vue"
 import ProductsView from "./views/ProductsView.vue"
+import ProductView from "./views/ProductView.vue"
 
 export default createRouter({
-	history: createMemoryHistory(),
+	history: createWebHistory(),
 	routes: [
 		{
 			path: "/",
@@ -27,6 +28,11 @@ export default createRouter({
 			path: "/cart",
 			name: "cart",
 			component: CartView
+		},
+		{
+			path: "/product/:id",
+			name: "product",
+			component: ProductView
 		}
 	]
 })
