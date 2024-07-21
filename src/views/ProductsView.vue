@@ -17,6 +17,7 @@ const store = siteDataStore()
 				<div class="cards">
 					<ProductCard
 						v-for="item in store.popularProducts"
+						:id="item.id"
 						:title="item.title"
 						:image="item.image"
 						:price="item.price"
@@ -31,6 +32,7 @@ const store = siteDataStore()
 				<div class="cards">
 					<ProductCard
 						v-for="item in store.products"
+						:id="item.id"
 						:title="item.title"
 						:image="item.image"
 						:price="item.price"

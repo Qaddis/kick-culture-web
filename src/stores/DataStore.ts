@@ -2,6 +2,7 @@ import { defineStore } from "pinia"
 import { computed, ref } from "vue"
 
 export interface ICard {
+	id: number
 	title: string
 	description: string
 	image: string
@@ -17,6 +18,7 @@ interface IAdvantages {
 
 const cards: ICard[] = [
 	{
+		id: 1,
 		image: "/card_1.png",
 		title: "yostep air 3",
 		description:
@@ -26,6 +28,7 @@ const cards: ICard[] = [
 		isPopular: false
 	},
 	{
+		id: 2,
 		image: "/card_2.png",
 		title: "yostep contrastmoon",
 		description:
@@ -35,6 +38,7 @@ const cards: ICard[] = [
 		isPopular: false
 	},
 	{
+		id: 3,
 		image: "/card_3.png",
 		title: "yostep ego",
 		description:
@@ -44,6 +48,7 @@ const cards: ICard[] = [
 		isPopular: false
 	},
 	{
+		id: 4,
 		image: "/card_4.png",
 		title: "yostep typhoon",
 		description:
@@ -53,6 +58,7 @@ const cards: ICard[] = [
 		isPopular: true
 	},
 	{
+		id: 5,
 		image: "/card_5.png",
 		title: "yostep ego 2",
 		description:
@@ -62,6 +68,7 @@ const cards: ICard[] = [
 		isPopular: true
 	},
 	{
+		id: 6,
 		image: "/card_6.png",
 		title: "yostep sunstroke",
 		description:
@@ -71,6 +78,7 @@ const cards: ICard[] = [
 		isPopular: true
 	},
 	{
+		id: 7,
 		image: "/card_7.png",
 		title: "yostep air 2",
 		description:
@@ -80,6 +88,7 @@ const cards: ICard[] = [
 		isPopular: false
 	},
 	{
+		id: 8,
 		image: "/card_8.png",
 		title: "yostep air",
 		description:

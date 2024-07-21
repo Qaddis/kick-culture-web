@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue"
+import { computed, onMounted, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import GradientButton from "../components/ui/GradientButton.vue"
+import { cartStore } from "../stores/CartStore"
 import type { ICard } from "../stores/DataStore"
 import { siteDataStore } from "../stores/DataStore"
 
@@ -9,16 +10,25 @@ type StateType = ICard | "Loading" | "None"
 
 const router = useRouter()
 const route = useRoute()
-const store = siteDataStore()
+
+const siteData = siteDataStore()
+const userCart = cartStore()
 
 const product = ref<StateType>("Loading")
+const inCart = computed<boolean>((): boolean => {
+	if (product.value !== "Loading" && product.value !== "None") {
+		return userCart.cart.some(cartItem => cartItem === product.value.id)
+	} else return false
+})
 
 const goBack = (): void => {
 	router.push("/products")
 }
 
 onMounted(() => {
-	const item = store.products.find(item => item.title === route.params.id)
+	const item = siteData.products.find(
+		item => item.id.toString() === route.params.id
+	)
 
 	if (item) product.value = item
 	else product.value = "None"
@@ -36,10 +46,7 @@ onMounted(() => {
 		</div>
 
 		<div v-else-if="product === 'None'" class="wrapper productNotFound">
-			<h2>
-				Product
-				<span>"{{ route.params.id.toString().toUpperCase() }}"</span> not found
-			</h2>
+			<h2>Product not found</h2>
 
 			<GradientButton @click="goBack" label="Go back" />
 		</div>
@@ -60,7 +67,36 @@ onMounted(() => {
 					<p>{{ product.description }}</p>
 				</div>
 
-				<GradientButton label="Add to cart" />
+				<div style="margin-top: 10px" v-if="product.discount !== 0">
+					<span class="old_price">{{ product.price }}</span>
+					<span class="current_price">
+						{{
+							(
+								product.price -
+								(product.price * product.discount) / 100
+							).toFixed(2)
+						}}
+					</span>
+					<span class="currency">usd</span>
+				</div>
+
+				<div style="margin-top: 10px" v-else>
+					<span class="current_price">
+						{{ product.price }}
+					</span>
+					<span class="currency">usd</span>
+				</div>
+
+				<GradientButton
+					v-if="inCart"
+					@click="userCart.toCart('remove', product.id)"
+					label="Remove from cart"
+				/>
+				<GradientButton
+					v-else
+					@click="userCart.toCart('add', product.id)"
+					label="Add to cart"
+				/>
 			</div>
 		</div>
 	</section>
@@ -69,7 +105,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .product {
 	width: 100%;
-	height: calc(100vh - 96px);
+	min-height: calc(100vh - 96px);
 	padding: 50px 25px;
 }
 
@@ -111,10 +147,6 @@ onMounted(() => {
 	h2 {
 		font-family: var(--header-font);
 		font-size: 2rem;
-
-		span {
-			color: var(--violet);
-		}
 	}
 }
 
@@ -191,8 +223,31 @@ onMounted(() => {
 	}
 
 	button {
-		margin-top: 25px;
+		margin-top: 15px;
 	}
+}
+
+.current_price {
+	font-size: 1.35rem;
+	color: var(--light);
+	font-weight: bold;
+}
+
+.old_price {
+	font-size: 1.35rem;
+	color: var(--light);
+	font-weight: bold;
+	text-decoration: line-through;
+	margin-right: 10px;
+	opacity: 0.5;
+}
+
+.currency {
+	text-transform: uppercase;
+	color: var(--violet);
+	font-weight: normal;
+	font-size: 1.15rem;
+	margin-left: 8px;
 }
 
 @keyframes loading {

@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import { computed } from "vue"
+import { RouterLink } from "vue-router"
+import { cartStore } from "../stores/CartStore"
+
 interface ICardProps {
+	id: number
 	title: string
 	image: string
 	price: number
@@ -7,14 +12,22 @@ interface ICardProps {
 }
 
 const props = defineProps<ICardProps>()
+const userCart = cartStore()
 
-import { RouterLink } from "vue-router"
+const inCart = computed<boolean>((): boolean => {
+	return userCart.cart.some(cartItem => cartItem === props.id)
+})
+
+const toCart = (): void => {
+	if (inCart.value) userCart.toCart("remove", props.id)
+	else userCart.toCart("add", props.id)
+}
 </script>
 
 <template>
 	<article class="card">
 		<span :class="{ discount: true, '--show': props.discount !== 0 }">
-			-{{ discount }}%
+			-{{ props.discount }}%
 		</span>
 
 		<img :src="props.image" :alt="`${props.title} Banner`" class="image" />
@@ -24,20 +37,20 @@ import { RouterLink } from "vue-router"
 		<p class="price">
 			{{
 				props.discount !== 0
-					? Math.round(
-							props.price - (props.price * (props.discount / 100)) / props.price
-					  )
+					? (props.price - (props.price * props.discount) / 100).toFixed(2)
 					: props.price
 			}}
 			<span class="currency">usd</span>
 		</p>
 
 		<div class="buttons">
-			<RouterLink class="btn" :to="`/product/${props.title}`"
-				>More Detail</RouterLink
+			<RouterLink class="btn" :to="`/product/${props.id}`"
+				>More Details</RouterLink
 			>
 
-			<button class="btn">+</button>
+			<button @click="toCart" :class="{ btn: true, 'in-cart': inCart }">
+				<span>+</span>
+			</button>
 		</div>
 	</article>
 </template>
