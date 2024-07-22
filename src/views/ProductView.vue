@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue"
+import { computed, onMounted, ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
+import ProductCard from "../components/ProductCard.vue"
 import GradientButton from "../components/ui/GradientButton.vue"
+import Heading from "../components/ui/Heading.vue"
 import { cartStore } from "../stores/CartStore"
 import type { ICard } from "../stores/DataStore"
 import { siteDataStore } from "../stores/DataStore"
@@ -11,28 +13,74 @@ type StateType = ICard | "Loading" | "None"
 const router = useRouter()
 const route = useRoute()
 
-const siteData = siteDataStore()
-const userCart = cartStore()
-
-const product = ref<StateType>("Loading")
-const inCart = computed<boolean>((): boolean => {
-	if (product.value !== "Loading" && product.value !== "None") {
-		return userCart.cart.some(cartItem => cartItem === product.value.id)
-	} else return false
-})
-
 const goBack = (): void => {
 	router.push("/products")
 }
 
-onMounted(() => {
+const siteData = siteDataStore()
+const userCart = cartStore()
+
+const product = ref<StateType>("Loading")
+
+const getProduct = (): void => {
+	product.value = "Loading"
+
 	const item = siteData.products.find(
 		item => item.id.toString() === route.params.id
 	)
 
 	if (item) product.value = item
 	else product.value = "None"
+}
+
+const inCart = computed<boolean>((): boolean => {
+	if (product.value !== "None" && product.value !== "Loading") {
+		return userCart.cart.some(cartItem => cartItem === product.value.id)
+	} else return false
 })
+
+const similar = computed<ICard[]>((): ICard[] => {
+	let similarProducts: ICard[] = []
+
+	if (product.value !== "None" && product.value !== "Loading") {
+		const shoeLine = product.value.title.split(" ")[1]
+
+		for (let i = 0; i < siteData.products.length; i++) {
+			let productsItem = siteData.products[i]
+
+			if (
+				productsItem.title.includes(shoeLine) &&
+				productsItem !== product.value &&
+				similarProducts.length < 3
+			) {
+				similarProducts.push(productsItem)
+			}
+		}
+
+		for (let i = 0; i < siteData.popularProducts.length; i++) {
+			let productsItem = siteData.popularProducts[i]
+
+			if (
+				productsItem !== product.value &&
+				similarProducts.length < 3 &&
+				!similarProducts.includes(productsItem)
+			) {
+				similarProducts.push(productsItem)
+			}
+		}
+	}
+
+	return similarProducts
+})
+
+onMounted(getProduct)
+
+watch(
+	() => route.params.id,
+	() => {
+		getProduct()
+	}
+)
 </script>
 
 <template>
@@ -59,11 +107,24 @@ onMounted(() => {
 				<span>Go back</span>
 			</button>
 
-			<div class="card">
+			<article class="product-card">
+				<span v-if="product.discount !== 0" class="sale_badge">
+					-{{ product.discount }}%
+				</span>
+
 				<img :src="product.image" :alt="`${product.title} Banner`" />
 
 				<div>
-					<h2>{{ product.title }}</h2>
+					<h2>
+						<span
+							v-if="product.isPopular"
+							title="This product is a bestseller"
+							class="bestseller"
+						>
+							🏆
+						</span>
+						{{ product.title }}
+					</h2>
 					<p>{{ product.description }}</p>
 				</div>
 
@@ -97,6 +158,21 @@ onMounted(() => {
 					@click="userCart.toCart('add', product.id)"
 					label="Add to cart"
 				/>
+			</article>
+
+			<div class="similar">
+				<Heading text="Maybe you'll like it 👀" />
+
+				<div class="container">
+					<ProductCard
+						v-for="item in similar"
+						:id="item.id"
+						:title="item.title"
+						:image="item.image"
+						:price="item.price"
+						:discount="item.discount"
+					/>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -107,6 +183,11 @@ onMounted(() => {
 	width: 100%;
 	min-height: calc(100vh - 96px);
 	padding: 50px 25px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .wrapper {
@@ -116,10 +197,7 @@ onMounted(() => {
 
 .loading {
 	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+
 	row-gap: 15px;
 
 	svg {
@@ -192,7 +270,8 @@ onMounted(() => {
 	}
 }
 
-.card {
+.product-card {
+	position: relative;
 	padding: 25px;
 	border: 3px solid var(--violet);
 	border-radius: 20px;
@@ -225,6 +304,10 @@ onMounted(() => {
 	button {
 		margin-top: 15px;
 	}
+
+	.bestseller {
+		filter: drop-shadow(0 0 8px #ffb02e);
+	}
 }
 
 .current_price {
@@ -242,12 +325,39 @@ onMounted(() => {
 	opacity: 0.5;
 }
 
+.sale_badge {
+	font-size: 1.25rem;
+	font-family: var(--header-font);
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	padding: 5px 10px;
+	margin-right: 20px;
+	background: var(--gradient);
+	border-radius: 5px;
+}
+
 .currency {
 	text-transform: uppercase;
 	color: var(--violet);
 	font-weight: normal;
 	font-size: 1.15rem;
 	margin-left: 8px;
+}
+
+.similar {
+	margin-top: 25px;
+
+	h2 {
+		text-align: start;
+		margin-bottom: 10px;
+	}
+
+	.container {
+		display: flex;
+		align-items: center;
+		column-gap: 35px;
+	}
 }
 
 @keyframes loading {
