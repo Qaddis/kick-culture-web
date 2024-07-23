@@ -326,11 +326,13 @@ watch(
 }
 
 .sale_badge {
-	font-size: 1.25rem;
-	font-family: var(--header-font);
 	position: absolute;
 	top: 20px;
 	left: 20px;
+
+	font-size: 1.25rem;
+	font-family: var(--header-font);
+	color: var(--add);
 	padding: 5px 10px;
 	margin-right: 20px;
 	background: var(--gradient);
