@@ -26,7 +26,7 @@ const toCart = (): void => {
 
 <template>
 	<article class="card">
-		<span :class="{ discount: true, '--show': props.discount !== 0 }">
+		<span class="discount" v-if="props.discount !== 0">
 			-{{ props.discount }}%
 		</span>
 
@@ -107,11 +107,6 @@ const toCart = (): void => {
 	border-radius: 25px;
 	color: var(--light);
 	font-family: var(--header-font);
-	opacity: 0;
-
-	&.--show {
-		opacity: 1;
-	}
 }
 
 .image {
