@@ -7,6 +7,12 @@ import router from "../router"
 import { cartStore } from "../stores/CartStore"
 import { type ICard, siteDataStore } from "../stores/DataStore"
 
+type PricesType = {
+	totalPrice: number
+	fullPrice: number
+	totalDiscount: number
+}
+
 const userCart = cartStore()
 const siteData = siteDataStore()
 
@@ -23,6 +29,32 @@ const cart = computed<ICard[]>((): ICard[] => {
 	}
 
 	return cartItems
+})
+
+const prices = computed<PricesType>((): PricesType => {
+	let price: PricesType = { totalPrice: 0, fullPrice: 0, totalDiscount: 0 }
+
+	for (let i = 0; i < cart.value.length; i++) {
+		let cartItem = cart.value[i]
+
+		if (cartItem.discount !== 0) {
+			price.fullPrice += cartItem.price
+			price.totalPrice += +(
+				cartItem.price -
+				(cartItem.price * cartItem.discount) / 100
+			).toFixed(2)
+		} else {
+			price.fullPrice += cartItem.price
+			price.totalPrice += cartItem.price
+		}
+	}
+
+	if (price.totalPrice !== price.fullPrice) {
+		price.totalDiscount =
+			100 - Math.round((price.totalPrice / price.fullPrice) * 100)
+	}
+
+	return price
 })
 </script>
 
@@ -50,7 +82,32 @@ const cart = computed<ICard[]>((): ICard[] => {
 				/>
 			</div>
 
-			<div v-if="cart.length > 0" class="bill"></div>
+			<div v-if="cart.length > 0" class="bill">
+				<div class="row">
+					<p class="basket-size">
+						Products in cart: <span>{{ cart.length }}</span>
+					</p>
+					<p class="total-price">
+						Total:
+						<span
+							v-if="prices.fullPrice !== prices.totalPrice"
+							class="full-price"
+						>
+							{{ prices.fullPrice }}
+						</span>
+						<span class="value">{{ prices.totalPrice }}</span>
+						<span class="currency"> usd</span>
+					</p>
+				</div>
+				<div
+					v-if="prices.fullPrice !== prices.totalPrice"
+					class="total-discount"
+				>
+					<p>
+						Total discount: <span>-{{ prices.totalDiscount }}%</span>
+					</p>
+				</div>
+			</div>
 		</div>
 	</section>
 </template>
@@ -99,6 +156,63 @@ const cart = computed<ICard[]>((): ICard[] => {
 		font-size: 1.5rem;
 		color: var(--add);
 		opacity: 0.8;
+	}
+}
+
+.bill {
+	width: 100%;
+	margin-top: 35px;
+	padding: 25px;
+	background-color: var(--dark);
+	border: 3px solid var(--violet);
+	border-radius: 20px;
+	color: var(--light);
+	font-size: 1.2rem;
+
+	.row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.basket-size span {
+		color: var(--mint);
+		font-weight: 600;
+	}
+
+	.total-price {
+		.value {
+			color: var(--mint);
+			font-weight: 600;
+		}
+
+		.currency {
+			text-transform: uppercase;
+			font-size: 1rem;
+			color: var(--violet);
+		}
+	}
+
+	.full-price {
+		font-weight: 600;
+		color: var(--mint);
+		text-decoration: line-through;
+		opacity: 0.6;
+		margin-right: 0.45rem;
+		margin-left: 0.5rem;
+	}
+
+	.total-discount {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin-top: 5px;
+
+		span {
+			color: var(--mint);
+			font-weight: 600;
+		}
 	}
 }
 </style>
