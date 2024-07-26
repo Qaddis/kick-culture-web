@@ -3,6 +3,7 @@ import type { CSSProperties } from "vue"
 
 interface IButtonProps {
 	label: string
+	title?: string
 	disabled?: boolean
 	style?: CSSProperties
 }
@@ -21,6 +22,7 @@ const handleClick = () => {
 		:style="props.style"
 		@click="handleClick"
 		:disabled="props.disabled"
+		:title="props.title"
 	>
 		{{ props.label }}
 	</button>

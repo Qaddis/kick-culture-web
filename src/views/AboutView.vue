@@ -5,7 +5,7 @@ import Heading from "../components/ui/Heading.vue"
 <template>
 	<section class="about">
 		<div class="wrapper">
-			<Heading text="About us" />
+			<Heading text="About 🔎" />
 
 			<p class="disclaimer">
 				<span>Kick Culture</span> isn't real store. This is a pet project made

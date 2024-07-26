@@ -28,8 +28,9 @@ sales.length = 3
 
 			<GradientButton
 				@click="goTo('/products')"
-				style="font-size: 1.5rem; z-index: 3; padding: 10px 25px"
 				label="Shop now!"
+				title='Go to "Products" page'
+				style="font-size: 1.5rem; z-index: 3; padding: 10px 25px"
 			/>
 		</div>
 	</section>
@@ -53,7 +54,11 @@ sales.length = 3
 				/>
 			</div>
 
-			<GradientButton @click="goTo('/products')" label="More Products" />
+			<GradientButton
+				@click="goTo('/products')"
+				label="More Products"
+				title='Go to "Products" page'
+			/>
 		</div>
 	</section>
 

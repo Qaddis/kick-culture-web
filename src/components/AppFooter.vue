@@ -26,7 +26,7 @@
 					<a
 						title="Go to the project repository"
 						target="_blank"
-						href="https://github.com/Qaddis"
+						href="https://github.com/Qaddis/kick-culture-web"
 					>
 						<svg><use xlink:href="#github-svg"></use></svg>
 					</a>

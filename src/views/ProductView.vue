@@ -107,14 +107,18 @@ onMounted(getProduct)
 			<h2>Loading...<br />Please, wait</h2>
 		</div>
 
-		<div v-else-if="product === 'None'" class="wrapper productNotFound">
+		<div v-else-if="product === 'None'" class="wrapper product-not-found">
 			<h2>Product not found</h2>
 
-			<GradientButton @click="goBack" label="Go back" />
+			<GradientButton
+				@click="goBack"
+				title='Go to "Products" page'
+				label="Go back"
+			/>
 		</div>
 
-		<div v-else class="wrapper productFound">
-			<button @click="goBack" class="back-btn">
+		<div v-else class="wrapper product-found">
+			<button title='Go to "Products" page' @click="goBack" class="back-btn">
 				<svg>
 					<use xlink:href="#back-svg"></use>
 				</svg>
@@ -142,6 +146,8 @@ onMounted(getProduct)
 					<p>{{ product.description }}</p>
 				</div>
 
+				<p class="hint">Choose size:</p>
+
 				<div class="sizes">
 					<div class="checkbox-container" v-for="size in product.sizes">
 						<input
@@ -152,7 +158,13 @@ onMounted(getProduct)
 							:value="size"
 							v-model="selectedSizes"
 						/>
-						<label class="size-badge" :for="`cb-${size}`">{{ size }}</label>
+						<label
+							title="Select this size"
+							class="size-badge"
+							:for="`cb-${size}`"
+						>
+							{{ size }}
+						</label>
 					</div>
 				</div>
 
@@ -180,12 +192,18 @@ onMounted(getProduct)
 					v-if="sizesInCart.length === 0"
 					@click="userCart.addToCart(product.id, selectedSizes)"
 					label="Add to cart"
+					:title="
+						selectedSizes.length !== 0
+							? 'Add selected sizes to cart'
+							: 'First you need to choose the size(s)'
+					"
 					:disabled="selectedSizes.length === 0"
 				/>
 				<GradientButton
 					v-else-if="sizesInCart.length > 0 && selectedSizes.length === 0"
 					@click="userCart.removeFromCart(product.id)"
 					label="Remove from cart"
+					title="Remove this pair from cart"
 				/>
 				<GradientButton
 					v-else-if="
@@ -193,6 +211,7 @@ onMounted(getProduct)
 						selectedSizes.sort((a, b) => a - b) === sizesInCart
 					"
 					label="Now in cart"
+					title="The selected sizes are already in the basket"
 					disabled
 				/>
 				<GradientButton
@@ -202,6 +221,7 @@ onMounted(getProduct)
 					"
 					@click="userCart.changeSizes(product.id, selectedSizes)"
 					label="Change sizes"
+					title="Change sizes already added to cart"
 				/>
 			</article>
 
@@ -259,7 +279,7 @@ onMounted(getProduct)
 	}
 }
 
-.productNotFound {
+.product-not-found {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -342,6 +362,11 @@ onMounted(getProduct)
 		margin: 25px 0 5px;
 	}
 
+	.hint {
+		margin-top: 15px;
+		color: var(--light);
+	}
+
 	p {
 		text-align: center;
 	}
@@ -363,7 +388,7 @@ onMounted(getProduct)
 		flex-wrap: wrap;
 		column-gap: 20px;
 		row-gap: 10px;
-		margin-top: 15px;
+		margin-top: 8px;
 
 		.checkbox-container {
 			position: relative;

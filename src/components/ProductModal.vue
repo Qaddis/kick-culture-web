@@ -58,12 +58,18 @@ watch(
 					<input
 						class="checkbox"
 						type="checkbox"
-						name="size-cb"
+						name="size-mcb"
 						:id="`mcb-${size}`"
 						:value="size"
 						v-model="selectedSizes"
 					/>
-					<label class="size-badge" :for="`mcb-${size}`">{{ size }}</label>
+					<label
+						title="Select this size"
+						class="size-badge"
+						:for="`mcb-${size}`"
+					>
+						{{ size }}
+					</label>
 				</div>
 			</div>
 
@@ -88,12 +94,18 @@ watch(
 				v-if="sizesInCart.length === 0"
 				@click="userCart.addToCart(product.id, selectedSizes)"
 				label="Add to cart"
+				:title="
+					selectedSizes.length !== 0
+						? 'Add selected sizes to cart'
+						: 'First you need to choose the size(s)'
+				"
 				:disabled="selectedSizes.length === 0"
 			/>
 			<GradientButton
 				v-else-if="sizesInCart.length > 0 && selectedSizes.length === 0"
 				@click="userCart.removeFromCart(product.id)"
 				label="Remove from cart"
+				title="Remove this pair from cart"
 			/>
 			<GradientButton
 				v-else-if="
@@ -101,6 +113,7 @@ watch(
 					selectedSizes.sort((a, b) => a - b) === sizesInCart
 				"
 				label="Now in cart"
+				title="The selected sizes are already in the basket"
 				disabled
 			/>
 			<GradientButton
@@ -110,6 +123,7 @@ watch(
 				"
 				@click="userCart.changeSizes(product.id, selectedSizes)"
 				label="Change sizes"
+				title="Change sizes already added to cart"
 			/>
 		</section>
 	</div>

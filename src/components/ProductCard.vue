@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue"
 import { RouterLink } from "vue-router"
-import { cartStore } from "../stores/CartStore"
 import { siteDataStore } from "../stores/DataStore"
 
 interface ICardProps {
@@ -13,12 +11,7 @@ interface ICardProps {
 }
 
 const props = defineProps<ICardProps>()
-const userCart = cartStore()
 const siteData = siteDataStore()
-
-const inCart = computed<boolean>((): boolean => {
-	return userCart.cart.some(cartItem => cartItem.id === props.id)
-})
 
 const toCart = (): void => {
 	siteData.setModal(props.id)
@@ -46,12 +39,16 @@ const toCart = (): void => {
 		</p>
 
 		<div class="buttons">
-			<RouterLink class="btn" :to="`/product/${props.id}`"
-				>More Details</RouterLink
+			<RouterLink
+				class="btn"
+				:to="`/product/${props.id}`"
+				title="Go to this product page"
 			>
+				More Details
+			</RouterLink>
 
-			<button @click="toCart" :class="{ btn: true, 'in-cart': inCart }">
-				<span>+</span>
+			<button title="Add this product to cart" @click="toCart" class="btn">
+				+
 			</button>
 		</div>
 	</article>
@@ -167,17 +164,6 @@ const toCart = (): void => {
 		position: absolute;
 		right: 20px;
 		padding: 10px 16px;
-	}
-
-	span {
-		display: inline-block;
-		transition: transform 0.2s;
-	}
-
-	&.in-cart {
-		span {
-			transform: rotateZ(45deg) translateY(-1px);
-		}
 	}
 }
 </style>

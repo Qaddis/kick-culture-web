@@ -87,6 +87,7 @@ const prices = computed<PricesType>((): PricesType => {
 				<GradientButton
 					@click="router.push('/products')"
 					label="Let's fix this!"
+					title='Go to "Products" page'
 				/>
 			</div>
 

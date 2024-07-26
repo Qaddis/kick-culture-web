@@ -41,12 +41,17 @@ const userCart = cartStore()
 				<span className="cart-card__currency">usd</span>
 			</p>
 			<div class="cart-card__buttons">
-				<RouterLink class="btn" :to="`product/${props.id}`">
+				<RouterLink
+					class="btn"
+					:to="`product/${props.id}`"
+					title="Go to this product page"
+				>
 					More Details
 				</RouterLink>
 				<button
-					@click="userCart.removeOneSize(props.id, props.size)"
 					class="btn"
+					@click="userCart.removeOneSize(props.id, props.size)"
+					title="Remove this product from cart"
 				>
 					✕
 				</button>
@@ -122,7 +127,7 @@ const userCart = cartStore()
 		margin-bottom: 5px;
 
 		span {
-			color: var(--mint);
+			color: var(--violet);
 		}
 	}
 
