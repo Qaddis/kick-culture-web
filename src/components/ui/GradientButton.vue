@@ -46,5 +46,13 @@ const handleClick = () => {
 		translate: 0 2px;
 		opacity: 0.75;
 	}
+
+	&:disabled {
+		cursor: not-allowed;
+		filter: grayscale(50%);
+		translate: none;
+		opacity: 1;
+		box-shadow: none;
+	}
 }
 </style>

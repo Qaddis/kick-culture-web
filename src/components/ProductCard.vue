@@ -2,6 +2,7 @@
 import { computed } from "vue"
 import { RouterLink } from "vue-router"
 import { cartStore } from "../stores/CartStore"
+import { siteDataStore } from "../stores/DataStore"
 
 interface ICardProps {
 	id: number
@@ -13,14 +14,15 @@ interface ICardProps {
 
 const props = defineProps<ICardProps>()
 const userCart = cartStore()
+const siteData = siteDataStore()
 
 const inCart = computed<boolean>((): boolean => {
-	return userCart.cart.some(cartItem => cartItem === props.id)
+	return userCart.cart.some(cartItem => cartItem.id === props.id)
 })
 
 const toCart = (): void => {
-	if (inCart.value) userCart.toCart("remove", props.id)
-	else userCart.toCart("add", props.id)
+	siteData.setModal(props.id)
+	console.log("set modal")
 }
 </script>
 

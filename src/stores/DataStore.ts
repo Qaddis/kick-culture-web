@@ -9,6 +9,7 @@ export interface ICard {
 	price: number
 	discount: number
 	isPopular: boolean
+	sizes: number[]
 }
 
 interface IAdvantages {
@@ -25,7 +26,8 @@ const cards: ICard[] = [
 			"Enjoy unparalleled comfort and style with the Yostep Air 3 sneakers. Designed for optimal performance and support, these shoes are perfect for your active lifestyle.",
 		price: 79.99,
 		discount: 20,
-		isPopular: false
+		isPopular: false,
+		sizes: [38, 39, 40, 41, 42, 43]
 	},
 	{
 		id: 2,
@@ -35,7 +37,8 @@ const cards: ICard[] = [
 			"Elevate your look with the Yostep Contrastmoon sneakers. Featuring a unique design with a blend of colors, these shoes are a statement piece that combines fashion and functionality.",
 		price: 82.5,
 		discount: 10,
-		isPopular: false
+		isPopular: false,
+		sizes: [36, 37, 38, 39, 40, 41]
 	},
 	{
 		id: 3,
@@ -45,7 +48,8 @@ const cards: ICard[] = [
 			"Step out in confidence with the Yostep Ego sneakers. These shoes exude charisma and personality, making them a must-have for those who want to stand out from the crowd.",
 		price: 89.5,
 		discount: 0,
-		isPopular: false
+		isPopular: false,
+		sizes: [37, 38, 39, 40, 41, 42]
 	},
 	{
 		id: 4,
@@ -55,7 +59,8 @@ const cards: ICard[] = [
 			"Embrace the power of the elements with the Yostep Typhoon sneakers. With a sturdy build and rugged appeal, these shoes are ready to weather any storm.",
 		price: 85.0,
 		discount: 5,
-		isPopular: true
+		isPopular: true,
+		sizes: [36, 37, 38, 39, 40, 41, 42]
 	},
 	{
 		id: 5,
@@ -65,7 +70,8 @@ const cards: ICard[] = [
 			"The Yostep Ego 2 sneakers redefine style and comfort. Experience luxury on your feet with these high-quality shoes that offer both elegance and performance.",
 		price: 92.0,
 		discount: 0,
-		isPopular: true
+		isPopular: true,
+		sizes: [39, 40, 41, 42, 43]
 	},
 	{
 		id: 6,
@@ -75,7 +81,8 @@ const cards: ICard[] = [
 			"Make a bold statement with the Yostep Sunstroke sneakers. Bright and vibrant, these shoes radiate energy and confidence, perfect for those who want to shine bright",
 		price: 88.0,
 		discount: 0,
-		isPopular: true
+		isPopular: true,
+		sizes: [36, 37, 38, 39, 40, 41, 42]
 	},
 	{
 		id: 7,
@@ -85,7 +92,8 @@ const cards: ICard[] = [
 			"Glide through your day with ease in the Yostep Air 2 sneakers. Lightweight and breathable, these shoes provide maximum support without compromising on style.",
 		price: 78.5,
 		discount: 0,
-		isPopular: false
+		isPopular: false,
+		sizes: [36, 37, 38, 39, 40, 41]
 	},
 	{
 		id: 8,
@@ -95,7 +103,8 @@ const cards: ICard[] = [
 			"Experience the ultimate in athletic footwear with the Yostep Air sneakers. Designed for those who demand the best, these shoes combine cutting-edge technology with a sleek and modern design.",
 		price: 75.0,
 		discount: 0,
-		isPopular: false
+		isPopular: false,
+		sizes: [36, 37, 38, 39, 40, 41, 42]
 	}
 ]
 
@@ -118,15 +127,35 @@ const adv: IAdvantages[] = [
 ]
 
 export const siteDataStore = defineStore("siteData", () => {
-	const products = ref(cards)
-	const advantages = ref(adv)
+	const products = ref<ICard[]>(cards)
+	const advantages = ref<IAdvantages[]>(adv)
+	const modal = ref<"Hide" | ICard>("Hide")
 
 	const salesProducts = computed(() =>
 		products.value.filter(product => product.discount !== 0)
 	)
+
 	const popularProducts = computed(() =>
 		products.value.filter(product => product.isPopular)
 	)
 
-	return { products, advantages, salesProducts, popularProducts }
+	function closeModal() {
+		modal.value = "Hide"
+	}
+
+	function setModal(id: number) {
+		const product = products.value.find(item => item.id === id)
+
+		if (product) modal.value = product
+	}
+
+	return {
+		products,
+		advantages,
+		salesProducts,
+		popularProducts,
+		modal,
+		closeModal,
+		setModal
+	}
 })

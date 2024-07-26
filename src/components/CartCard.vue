@@ -7,6 +7,7 @@ interface ICardProps {
 	image: string
 	price: number
 	discount: number
+	size: number
 }
 
 const props = defineProps<ICardProps>()
@@ -16,7 +17,7 @@ const userCart = cartStore()
 
 <template>
 	<article class="cart-card">
-		<span class="discount" v-if="props.discount !== 0">
+		<span class="cart-card__discount" v-if="props.discount !== 0">
 			-{{ props.discount }}%
 		</span>
 
@@ -28,6 +29,9 @@ const userCart = cartStore()
 
 		<div class="text-info">
 			<h3 class="cart-card__heading">{{ props.title }}</h3>
+			<p class="cart-card__size">
+				Size: <span>{{ props.size }}</span>
+			</p>
 			<p class="cart-card__price">
 				{{
 					props.discount !== 0
@@ -40,7 +44,10 @@ const userCart = cartStore()
 				<RouterLink class="btn" :to="`product/${props.id}`">
 					More Details
 				</RouterLink>
-				<button @click="userCart.toCart('remove', props.id)" class="btn">
+				<button
+					@click="userCart.removeOneSize(props.id, props.size)"
+					class="btn"
+				>
 					✕
 				</button>
 			</div>
@@ -73,7 +80,7 @@ const userCart = cartStore()
 		transition: 0.35s all;
 	}
 
-	.discount {
+	&__discount {
 		position: absolute;
 		top: 20px;
 		left: 20px;
@@ -106,7 +113,17 @@ const userCart = cartStore()
 		position: relative;
 		color: var(--light);
 		font-weight: 700;
+	}
+
+	&__size {
+		text-transform: none;
+		font-size: 1rem;
+		color: var(--light);
 		margin-bottom: 5px;
+
+		span {
+			color: var(--mint);
+		}
 	}
 
 	&__price {

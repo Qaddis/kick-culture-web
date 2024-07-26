@@ -21,6 +21,7 @@ const siteData = siteDataStore()
 const userCart = cartStore()
 
 const product = ref<StateType>("Loading")
+const selectedSizes = ref<number[]>([])
 
 const getProduct = (): void => {
 	product.value = "Loading"
@@ -29,14 +30,20 @@ const getProduct = (): void => {
 		item => item.id.toString() === route.params.id
 	)
 
-	if (item) product.value = item
-	else product.value = "None"
+	if (item) {
+		product.value = item
+	} else product.value = "None"
 }
 
-const inCart = computed<boolean>((): boolean => {
-	if (product.value !== "None" && product.value !== "Loading") {
-		return userCart.cart.some(cartItem => cartItem === product.value.id)
-	} else return false
+const sizesInCart = computed<number[]>((): number[] => {
+	if (product.value !== "Loading" && product.value !== "None") {
+		const cartSizes = userCart.cart.find(
+			cartItem => cartItem.id === product.value.id
+		)
+
+		if (cartSizes) return cartSizes.sizes
+		else return []
+	} else return []
 })
 
 const similar = computed<ICard[]>((): ICard[] => {
@@ -73,7 +80,12 @@ const similar = computed<ICard[]>((): ICard[] => {
 	return similarProducts
 })
 
-onMounted(getProduct)
+watch(
+	() => sizesInCart.value,
+	() => {
+		selectedSizes.value = sizesInCart.value
+	}
+)
 
 watch(
 	() => route.params.id,
@@ -81,6 +93,8 @@ watch(
 		getProduct()
 	}
 )
+
+onMounted(getProduct)
 </script>
 
 <template>
@@ -128,6 +142,20 @@ watch(
 					<p>{{ product.description }}</p>
 				</div>
 
+				<div class="sizes">
+					<div class="checkbox-container" v-for="size in product.sizes">
+						<input
+							class="checkbox"
+							type="checkbox"
+							name="size-cb"
+							:id="`cb-${size}`"
+							:value="size"
+							v-model="selectedSizes"
+						/>
+						<label class="size-badge" :for="`cb-${size}`">{{ size }}</label>
+					</div>
+				</div>
+
 				<div style="margin-top: 10px" v-if="product.discount !== 0">
 					<span class="old_price">{{ product.price }}</span>
 					<span class="current_price">
@@ -149,14 +177,31 @@ watch(
 				</div>
 
 				<GradientButton
-					v-if="inCart"
-					@click="userCart.toCart('remove', product.id)"
+					v-if="sizesInCart.length === 0"
+					@click="userCart.addToCart(product.id, selectedSizes)"
+					label="Add to cart"
+					:disabled="selectedSizes.length === 0"
+				/>
+				<GradientButton
+					v-else-if="sizesInCart.length > 0 && selectedSizes.length === 0"
+					@click="userCart.removeFromCart(product.id)"
 					label="Remove from cart"
 				/>
 				<GradientButton
-					v-else
-					@click="userCart.toCart('add', product.id)"
-					label="Add to cart"
+					v-else-if="
+						sizesInCart.length > 0 &&
+						selectedSizes.sort((a, b) => a - b) === sizesInCart
+					"
+					label="Now in cart"
+					disabled
+				/>
+				<GradientButton
+					v-else-if="
+						sizesInCart.length > 0 &&
+						selectedSizes.sort((a, b) => a - b) !== sizesInCart
+					"
+					@click="userCart.changeSizes(product.id, selectedSizes)"
+					label="Change sizes"
 				/>
 			</article>
 
@@ -307,6 +352,49 @@ watch(
 
 	.bestseller {
 		filter: drop-shadow(0 0 8px #ffb02e);
+		cursor: pointer;
+	}
+
+	.sizes {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		column-gap: 20px;
+		row-gap: 10px;
+		margin-top: 15px;
+
+		.checkbox-container {
+			position: relative;
+			background: var(--gradient);
+			padding: 1px;
+			border-radius: 8px;
+			transition: box-shadow 0.2s;
+
+			&:hover {
+				box-shadow: 0 0 5px var(--mint);
+			}
+		}
+
+		.size-badge {
+			display: inline-block;
+			border-radius: 8px;
+			text-align: center;
+			background-color: var(--dark);
+			width: 50px;
+			font-size: 1.3rem;
+			transition: background-color 0.25s;
+		}
+
+		.checkbox {
+			position: absolute;
+			z-index: -1;
+
+			&:checked + .size-badge {
+				background-color: transparent;
+			}
+		}
 	}
 }
 

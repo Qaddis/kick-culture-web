@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router"
 import Footer from "./components/AppFooter.vue"
 import Header from "./components/AppHeader.vue"
+import ProductModal from "./components/ProductModal.vue"
 </script>
 
 <template>
@@ -10,6 +11,8 @@ import Header from "./components/AppHeader.vue"
 	<main class="main">
 		<RouterView />
 	</main>
+
+	<ProductModal />
 
 	<Footer />
 </template>

@@ -13,19 +13,26 @@ type PricesType = {
 	totalDiscount: number
 }
 
+type ICart = {
+	size: number
+} & ICard
+
 const userCart = cartStore()
 const siteData = siteDataStore()
 
-const cart = computed<ICard[]>((): ICard[] => {
-	let cartItems: ICard[] = []
+const cart = computed<ICart[]>((): ICart[] => {
+	let cartItems: ICart[] = []
 
 	for (let i = 0; i < userCart.cart.length; i++) {
 		let item = siteData.products.find(
-			product => product.id === userCart.cart[i]
+			product => product.id === userCart.cart[i].id
 		)
 
-		if (item) cartItems.push(item)
-		else userCart.toCart("remove", userCart.cart[i])
+		if (item)
+			userCart.cart[i].sizes.forEach(size =>
+				cartItems.push({ ...item, size: size })
+			)
+		else userCart.removeFromCart(userCart.cart[i].id)
 	}
 
 	return cartItems
@@ -71,6 +78,7 @@ const prices = computed<PricesType>((): PricesType => {
 					:image="item.image"
 					:discount="item.discount"
 					:price="item.price"
+					:size="item.size"
 				/>
 			</div>
 			<div v-else class="empty">
