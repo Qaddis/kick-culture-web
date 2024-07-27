@@ -1,79 +1,103 @@
 <script setup lang="ts">
+// Импорты
 import { useRouter } from "vue-router"
 import ProductCard from "../components/ProductCard.vue"
 import GradientButton from "../components/ui/GradientButton.vue"
 import Heading from "../components/ui/Heading.vue"
 import { siteDataStore } from "../stores/DataStore"
 
+// Подключение в компонент "роутера"
 const router = useRouter()
+
+// Подключение в компонент хранилища (внутренние данные)
 const store = siteDataStore()
 
+// Функция для перехода к другой странице
 const goTo = (to: string): void => {
 	router.push(to)
 }
 
+// Получение 3х товаров со скидкой
 const sales = store.salesProducts
 sales.length = 3
 </script>
 
 <template>
-	<section class="landing">
-		<div class="wrapper">
-			<h2 class="landing__h2">Kick Culture</h2>
-			<p class="landing__p">
-				Walk in <span>style</span>, breathe in <span>culture</span>:
-				<br />
-				<span>Kick Culture</span> - in every pair, there&apos;s a history!
-			</p>
+	<!-- Главная страница -->
+	<div>
+		<!-- Раздел "Лендинг" -->
+		<section class="landing">
+			<div class="wrapper">
+				<!-- Название сайта -->
+				<h2 class="landing__h2">Kick Culture</h2>
 
-			<GradientButton
-				@click="goTo('/products')"
-				label="Shop now!"
-				title='Go to "Products" page'
-				style="font-size: 1.5rem; z-index: 3; padding: 10px 25px"
-			/>
-		</div>
-	</section>
+				<!-- Лозунг -->
+				<p class="landing__p">
+					Walk in <span>style</span>, breathe in <span>culture</span>:
+					<br />
+					<span>Kick Culture</span> - in every pair, there&apos;s a history!
+				</p>
 
-	<marquee class="ticker" scrollamount="8" behavior="scroll" direction="right">
-		🤩 Discounts up to 20%! 🤩
-	</marquee>
-
-	<section class="sales">
-		<div class="wrapper">
-			<Heading text="Sales" />
-
-			<div class="cards">
-				<ProductCard
-					v-for="item in sales"
-					:id="item.id"
-					:title="item.title"
-					:image="item.image"
-					:price="item.price"
-					:discount="item.discount"
+				<!-- Кнопка для перехода на страницу всех товаров -->
+				<gradient-button
+					@click="goTo('/products')"
+					label="Shop now!"
+					title='Go to "Products" page'
+					style="font-size: 1.5rem; z-index: 3; padding: 10px 25px"
 				/>
 			</div>
+		</section>
 
-			<GradientButton
-				@click="goTo('/products')"
-				label="More Products"
-				title='Go to "Products" page'
-			/>
-		</div>
-	</section>
+		<!-- Бегущая строка (с сообщением о скидках) -->
+		<marquee
+			class="ticker"
+			scrollamount="8"
+			behavior="scroll"
+			direction="right"
+		>
+			🤩 Discounts up to 20%! 🤩
+		</marquee>
 
-	<section class="advantages">
-		<div class="wrapper">
-			<Heading text="Why us?" />
+		<!-- Раздел "Скидки" -->
+		<section class="sales">
+			<div class="wrapper">
+				<heading text="Sales" />
 
-			<ul class="advantages__ul">
-				<li v-for="item in store.advantages" class="advantages__li">
-					<h3>{{ item.briefly }}</h3>
-					<p>{{ item.details }}</p>
-				</li>
-			</ul>
-		</div>
-	</section>
+				<!-- Список товаров со скидками -->
+				<div class="cards">
+					<product-card
+						v-for="item in sales"
+						:id="item.id"
+						:title="item.title"
+						:image="item.image"
+						:price="item.price"
+						:discount="item.discount"
+					/>
+				</div>
+
+				<gradient-button
+					@click="goTo('/products')"
+					label="More Products"
+					title='Go to "Products" page'
+				/>
+			</div>
+		</section>
+
+		<!-- Раздел "Преимущества" -->
+		<section class="advantages">
+			<div class="wrapper">
+				<heading text="Why us?" />
+
+				<!-- Список преимуществ -->
+				<ul class="advantages__ul">
+					<li v-for="item in store.advantages" class="advantages__li">
+						<h3>{{ item.briefly }}</h3>
+						<p>{{ item.details }}</p>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</div>
 </template>
 
 <style scoped lang="scss">

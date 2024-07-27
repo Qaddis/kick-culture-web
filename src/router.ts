@@ -1,11 +1,14 @@
+// Импорт нужных модулей
 import { createRouter, createWebHistory } from "vue-router"
 
+// Импорт всех страницы
 import AboutView from "./views/AboutView.vue"
 import CartView from "./views/CartView.vue"
 import MainView from "./views/MainView.vue"
 import ProductsView from "./views/ProductsView.vue"
 import ProductView from "./views/ProductView.vue"
 
+// Создание и экспорт "роутера"
 export default createRouter({
 	history: createWebHistory(),
 	routes: [

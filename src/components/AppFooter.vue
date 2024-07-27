@@ -3,6 +3,7 @@
 <template>
 	<footer class="footer">
 		<div class="wrapper">
+			<!-- Список соцсетей для связи с разработчиком -->
 			<ul class="socials">
 				<li>
 					<a
@@ -33,6 +34,7 @@
 				</li>
 			</ul>
 
+			<!-- Копирайт -->
 			<p class="copyright">© 2024 Svyatoslav "Qaddis" Barsukov</p>
 		</div>
 	</footer>

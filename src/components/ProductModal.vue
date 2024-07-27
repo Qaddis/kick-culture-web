@@ -1,15 +1,19 @@
 <script setup lang="ts">
+// Импорты
 import { computed, ref, watch } from "vue"
 import { cartStore } from "../stores/CartStore"
 import { type ICard, siteDataStore } from "../stores/DataStore"
 import GradientButton from "./ui/GradientButton.vue"
 
+// Подключение в компонент хранилищ (внутренние данные и корзина)
 const siteData = siteDataStore()
 const userCart = cartStore()
 
+// Объявление состояний (товар (статус модального окна) и выбранные размеры)
 const product = ref<ICard | "Hide">("Hide")
 const selectedSizes = ref<number[]>([])
 
+// Получение списка добавленных в корзину размеров этого товара
 const sizesInCart = computed<number[]>((): number[] => {
 	if (product.value !== "Hide") {
 		const cartSizes = userCart.cart.find(item => item.id === product.value.id)
@@ -19,6 +23,7 @@ const sizesInCart = computed<number[]>((): number[] => {
 	} else return []
 })
 
+// Функция для удаления/добавления товара или изменения выбранных размеров этого товара в корзине с последующим закрытием модального окна
 function handleButtonClick(action: "add" | "remove" | "change"): void {
 	if (product.value !== "Hide") {
 		if (action === "add")
@@ -31,6 +36,7 @@ function handleButtonClick(action: "add" | "remove" | "change"): void {
 	siteData.closeModal()
 }
 
+// Наблюдение за изменением списка размеров этого товара в корзине и обновление списка выбранных пользователем товаров
 watch(
 	() => sizesInCart.value,
 	() => {
@@ -38,11 +44,13 @@ watch(
 	}
 )
 
+// Наблюдение за изменением статуса модального окна в хранилище и обновление статуса модального окна внутри компонента
 watch(
 	() => siteData.modal,
 	() => {
 		product.value = siteData.modal
 
+		// Выключение вертикального скролла на странице если модальное окно открыто и включение скролла, если модальное окно закрыто
 		if (siteData.modal !== "Hide") document.body.style.overflowY = "hidden"
 		else document.body.style.overflowY = "scroll"
 	}
@@ -50,7 +58,9 @@ watch(
 </script>
 
 <template>
+	<!-- Оверлей, перекрывающий весь доступный экран -->
 	<div @click="siteData.closeModal" v-if="product !== `Hide`" class="overlay">
+		<!-- Кнопка для закрытия модального окна -->
 		<button
 			class="close-btn"
 			@click="siteData.closeModal"
@@ -59,8 +69,11 @@ watch(
 			✕
 		</button>
 
+		<!-- Модальное окно -->
 		<section @click="e => e.stopPropagation()" class="product-modal">
+			<!-- Название продукта -->
 			<h2 class="product-modal__title">
+				<!-- Значок "Популярный товар" -->
 				<span
 					v-if="product.isPopular"
 					title="This product is a bestseller"
@@ -71,8 +84,10 @@ watch(
 				{{ product.title }}
 			</h2>
 
+			<!-- Подсказка (выбор размеров) -->
 			<p class="hint">Choose size:</p>
 
+			<!-- Список все доступных размеров -->
 			<div class="product-modal__sizes">
 				<div class="checkbox-container" v-for="size in product.sizes">
 					<input
@@ -93,8 +108,12 @@ watch(
 				</div>
 			</div>
 
+			<!-- Цена на товар (если есть скидка) -->
 			<div v-if="product.discount !== 0" class="product-modal__price">
+				<!-- Старая цена (цена без скидки) -->
 				<span class="old_price">{{ product.price }}</span>
+
+				<!-- Цена со скидкой -->
 				<span class="current_price">
 					{{
 						(product.price - (product.price * product.discount) / 100).toFixed(
@@ -105,12 +124,14 @@ watch(
 				<span class="currency">usd</span>
 			</div>
 
+			<!-- Цена на товар (если скидки нет) -->
 			<div v-else class="product-modal__price">
 				<span class="current_price">{{ product.price }}</span>
 				<span class="currency">usd</span>
 			</div>
 
-			<GradientButton
+			<!-- Кнопка для добавления товара в корзину -->
+			<gradient-button
 				v-if="sizesInCart.length === 0"
 				@click="handleButtonClick('add')"
 				label="Add to cart"
@@ -121,13 +142,17 @@ watch(
 				"
 				:disabled="selectedSizes.length === 0"
 			/>
-			<GradientButton
+
+			<!-- Кнопка для удаления товара из корзины -->
+			<gradient-button
 				v-else-if="sizesInCart.length > 0 && selectedSizes.length === 0"
 				@click="handleButtonClick('remove')"
 				label="Remove from cart"
 				title="Remove this pair from cart"
 			/>
-			<GradientButton
+
+			<!-- Неактивная кнопка (если товар уже есть в корзине и выбранные пользователем размеры совпадают с размерами в корзине) -->
+			<gradient-button
 				v-else-if="
 					sizesInCart.length > 0 &&
 					selectedSizes.sort((a, b) => a - b) === sizesInCart
@@ -136,7 +161,9 @@ watch(
 				title="The selected sizes are already in the basket"
 				disabled
 			/>
-			<GradientButton
+
+			<!-- Кнопка для изменения выбранных размеров товара в корзине -->
+			<gradient-button
 				v-else-if="
 					sizesInCart.length > 0 &&
 					selectedSizes.sort((a, b) => a - b) !== sizesInCart

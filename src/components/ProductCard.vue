@@ -1,7 +1,9 @@
 <script setup lang="ts">
+// Импорты
 import { RouterLink } from "vue-router"
 import { siteDataStore } from "../stores/DataStore"
 
+// Типизация пропсов
 interface ICardProps {
 	id: number
 	title: string
@@ -10,25 +12,33 @@ interface ICardProps {
 	discount: number
 }
 
+// Объявление пропсов
 const props = defineProps<ICardProps>()
+
+// Подключение в компонент хранилища (внутренние данные)
 const siteData = siteDataStore()
 
+// Функция для открытия модального окна с этим товаром
 const toCart = (): void => {
 	siteData.setModal(props.id)
-	console.log("set modal")
 }
 </script>
 
 <template>
+	<!-- Карточка товара -->
 	<article class="card">
+		<!-- Значок со скидкой -->
 		<span class="discount" v-if="props.discount !== 0">
 			-{{ props.discount }}%
 		</span>
 
+		<!-- Изображение товара -->
 		<img :src="props.image" :alt="`${props.title} Banner`" class="image" />
 
+		<!-- Название товара -->
 		<h3 class="heading">{{ props.title }}</h3>
 
+		<!-- Цена на товар (Со скидкой, если она есть) -->
 		<p class="price">
 			{{
 				props.discount !== 0
@@ -38,15 +48,18 @@ const toCart = (): void => {
 			<span class="currency">usd</span>
 		</p>
 
+		<!-- Блок кнопок -->
 		<div class="buttons">
-			<RouterLink
+			<!-- Кнопка для перехода на страницу товара -->
+			<router-link
 				class="btn"
 				:to="`/product/${props.id}`"
 				title="Go to this product page"
 			>
 				More Details
-			</RouterLink>
+			</router-link>
 
+			<!-- Кнопка для открытия модального окна (выбор нужных размеров и их добавление в корзину) -->
 			<button title="Add this product to cart" @click="toCart" class="btn">
 				+
 			</button>

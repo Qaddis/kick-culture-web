@@ -1,9 +1,18 @@
+// Импорт нужных библиотек
+import { MotionPlugin } from "@vueuse/motion"
 import { createPinia } from "pinia"
 import { createApp } from "vue"
 
-import App from "./App.vue"
-import router from "./router"
+import App from "./App.vue" // Импорт корневого компонента
+import "./globals.scss" // Импорт глобальных стилей
+import router from "./router" // Импорт "роутера" (модуль навигации)
 
-import "./globals.scss"
+// Создание приложения
+const app = createApp(App)
 
-createApp(App).use(router).use(createPinia()).mount("#app")
+app.use(router) // Подключение навигации
+app.use(createPinia()) // Подключение state-менеджера
+app.use(MotionPlugin) // Подключение анимаций
+
+// Запуск приложения
+app.mount("#app")

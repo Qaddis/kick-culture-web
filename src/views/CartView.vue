@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Импорты
 import { computed } from "vue"
 import CartCard from "../components/CartCard.vue"
 import GradientButton from "../components/ui/GradientButton.vue"
@@ -7,27 +8,33 @@ import router from "../router"
 import { cartStore } from "../stores/CartStore"
 import { type ICard, siteDataStore } from "../stores/DataStore"
 
+// Тип для объекта итоговых цен и скидок
 type PricesType = {
 	totalPrice: number
 	fullPrice: number
 	totalDiscount: number
 }
 
+// Тип для товара в корзине
 type ICart = {
 	size: number
 } & ICard
 
+// Подключение в компонент хранилищ (корзина и внутренние данные)
 const userCart = cartStore()
 const siteData = siteDataStore()
 
+// Получение всех товаров в корзине (с учётом, что каждый размер - отдельный товар со своим размером)
 const cart = computed<ICart[]>((): ICart[] => {
 	let cartItems: ICart[] = []
 
 	for (let i = 0; i < userCart.cart.length; i++) {
+		// Получаем каждый товар в корзине
 		let item = siteData.products.find(
 			product => product.id === userCart.cart[i].id
 		)
 
+		// Каждый выбранный размер товара делаем отдельным продуктом
 		if (item)
 			userCart.cart[i].sizes.forEach(size =>
 				cartItems.push({ ...item, size: size })
@@ -38,12 +45,14 @@ const cart = computed<ICart[]>((): ICart[] => {
 	return cartItems
 })
 
+// Получение полной цены, цены со всеми скидками и итоговой скидки
 const prices = computed<PricesType>((): PricesType => {
 	let price: PricesType = { totalPrice: 0, fullPrice: 0, totalDiscount: 0 }
 
 	for (let i = 0; i < cart.value.length; i++) {
 		let cartItem = cart.value[i]
 
+		// Если скидка есть - высчитываем её и записываем в поле "итоговая цена", а полную цену записываем в поле "полная цена"
 		if (cartItem.discount !== 0) {
 			price.fullPrice += cartItem.price
 			price.totalPrice += +(
@@ -51,11 +60,13 @@ const prices = computed<PricesType>((): PricesType => {
 				(cartItem.price * cartItem.discount) / 100
 			).toFixed(2)
 		} else {
+			// Если скидки нет - записываем полную цену и в поле "итоговая цена", и в поле "полная цена"
 			price.fullPrice += cartItem.price
 			price.totalPrice += cartItem.price
 		}
 	}
 
+	// Высчитываем процент итоговой скидки
 	if (price.totalPrice !== price.fullPrice) {
 		price.totalDiscount =
 			100 - Math.round((price.totalPrice / price.fullPrice) * 100)
@@ -66,12 +77,14 @@ const prices = computed<PricesType>((): PricesType => {
 </script>
 
 <template>
+	<!-- Страница "Корзина" -->
 	<section class="cart">
-		<Heading text="Cart 🛒" />
+		<heading text="Cart 🛒" />
 
 		<div :class="{ wrapper: true, '--empty': cart.length == 0 }">
+			<!-- Список всех товаров в корзине -->
 			<div v-if="cart.length > 0" class="cards">
-				<CartCard
+				<cart-card
 					v-for="item in cart"
 					:id="item.id"
 					:title="item.title"
@@ -81,37 +94,50 @@ const prices = computed<PricesType>((): PricesType => {
 					:size="item.size"
 				/>
 			</div>
+
+			<!-- Блок с сообщением, если корзина пустая -->
 			<div v-else class="empty">
 				<h3>It's empty here for now... 😭</h3>
 
-				<GradientButton
+				<!-- Кнопка для перехода на страницу всех товаров -->
+				<gradient-button
 					@click="router.push('/products')"
 					label="Let's fix this!"
 					title='Go to "Products" page'
 				/>
 			</div>
 
+			<!-- Информация о корзине (счёт) -->
 			<div v-if="cart.length > 0" class="bill">
 				<div class="row">
+					<!-- Размер корзины (кол-во товаров в корзине) -->
 					<p class="basket-size">
 						Products in cart: <span>{{ cart.length }}</span>
 					</p>
+
+					<!-- Цена всех товаров в корзине -->
 					<p class="total-price">
 						Total:
+
+						<!-- Итоговая цена (цена со скидками) -->
 						<span
 							v-if="prices.fullPrice !== prices.totalPrice"
 							class="full-price"
 						>
 							{{ prices.fullPrice }}
 						</span>
+
+						<!-- Полная цена (цена без скидок) -->
 						<span class="value">{{ prices.totalPrice }}</span>
 						<span class="currency"> usd</span>
 					</p>
 				</div>
+				<!-- Блок с итоговой скидкой -->
 				<div
 					v-if="prices.fullPrice !== prices.totalPrice"
 					class="total-discount"
 				>
+					<!-- Итоговая скидка -->
 					<p>
 						Total discount: <span>-{{ prices.totalDiscount }}%</span>
 					</p>

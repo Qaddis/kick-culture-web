@@ -1,21 +1,26 @@
 <script setup lang="ts">
+// Импорты
 import ProductCard from "../components/ProductCard.vue"
 import Heading from "../components/ui/Heading.vue"
 import { siteDataStore } from "../stores/DataStore"
 
+// Подключение в компонент хранилища (внутренние данные)
 const store = siteDataStore()
 </script>
 
 <template>
+	<!-- Страница со всеми товарами -->
 	<div class="products">
 		<div class="wrapper">
+			<!-- Раздел "Популярные товары" -->
 			<section class="products__best">
 				<h2>
 					<span>The best</span>
 				</h2>
 
+				<!-- Список популярных товаров -->
 				<div class="cards">
-					<ProductCard
+					<product-card
 						v-for="item in store.popularProducts"
 						:id="item.id"
 						:title="item.title"
@@ -26,11 +31,13 @@ const store = siteDataStore()
 				</div>
 			</section>
 
+			<!-- Раздел "Все товары" -->
 			<section class="products__all">
-				<Heading text="All products" />
+				<heading text="All products" />
 
+				<!-- Список всех товаров -->
 				<div class="cards">
-					<ProductCard
+					<product-card
 						v-for="item in store.products"
 						:id="item.id"
 						:title="item.title"

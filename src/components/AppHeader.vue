@@ -1,13 +1,17 @@
 <script setup lang="ts">
+// Импорты
 import { computed } from "vue"
 import { RouterLink, useRoute, useRouter } from "vue-router"
 import { cartStore } from "../stores/CartStore"
 
-const router = useRouter()
+// Получение текущего роута и подключение в компонент "роутера"
 const route = useRoute()
+const router = useRouter()
 
+// Подключение в компонент хранилища (корзина)
 const userCart = cartStore()
 
+// Получение количества товаров в корзине
 const cartSize = computed<number>((): number => {
 	let size: number = 0
 	userCart.cart.forEach(cartItem => {
@@ -17,6 +21,7 @@ const cartSize = computed<number>((): number => {
 	return size
 })
 
+// Функция для перехода на страницу корзины
 const goToCartPage = (): void => {
 	router.push("/cart")
 }
@@ -25,30 +30,34 @@ const goToCartPage = (): void => {
 <template>
 	<header class="header">
 		<div class="wrapper">
+			<!-- Логотип сайта (название) -->
 			<h1 class="logo">
-				<RouterLink title='Go to "Home" page' to="/"> Kick Culture </RouterLink>
+				<router-link title='Go to "Home" page' to="/">
+					Kick Culture
+				</router-link>
 			</h1>
 
+			<!-- Панель навигации по сайту -->
 			<nav class="nav">
-				<RouterLink
+				<router-link
 					:class="{
 						'nav-link': true,
 						'nav-link--active': route.fullPath === '/'
 					}"
 					to="/"
 					title='Go to "Home" page'
-					>Home</RouterLink
+					>Home</router-link
 				>
-				<RouterLink
+				<router-link
 					:class="{
 						'nav-link': true,
 						'nav-link--active': route.fullPath === '/products'
 					}"
 					to="/products"
 					title='Go to "Products" page'
-					>Products</RouterLink
+					>Products</router-link
 				>
-				<RouterLink
+				<router-link
 					:class="{
 						'nav-link': true,
 						'nav-link--active': route.fullPath === '/about'
@@ -57,8 +66,9 @@ const goToCartPage = (): void => {
 					to="/about"
 				>
 					About
-				</RouterLink>
+				</router-link>
 
+				<!-- Кнопка для перехода в корзину -->
 				<button
 					@click="goToCartPage"
 					title='Go to "Cart" page'
@@ -68,9 +78,12 @@ const goToCartPage = (): void => {
 						<use xlink:href="#cart-svg"></use>
 					</svg>
 
-					<span v-if="cartSize > 0" class="cart-size-badge">
-						{{ cartSize }}
-					</span>
+					<!-- Значок с кол-вом товаров в корзине -->
+					<transition mode="default" name="cart-badge">
+						<span v-if="cartSize > 0" class="cart-size-badge">
+							{{ cartSize }}
+						</span>
+					</transition>
 				</button>
 			</nav>
 		</div>
@@ -208,5 +221,19 @@ const goToCartPage = (): void => {
 		bottom: -0.35rem;
 		right: -0.35rem;
 	}
+}
+
+/* Cart badge transition */
+.cart-badge-enter-from,
+.cart-badge-leave-to {
+	opacity: 0;
+}
+
+.cart-badge-enter-active {
+	transition: opacity 0.15s ease-out;
+}
+
+.cart-badge-leave-active {
+	transition: opacity 0.15s ease-in;
 }
 </style>

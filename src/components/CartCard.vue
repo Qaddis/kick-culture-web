@@ -1,6 +1,8 @@
 <script setup lang="ts">
+// Импорт хранилища (корзина)
 import { cartStore } from "../stores/CartStore"
 
+// Типизация пропсов
 interface ICardProps {
 	id: number
 	title: string
@@ -10,28 +12,39 @@ interface ICardProps {
 	size: number
 }
 
+// Объявление пропсов
 const props = defineProps<ICardProps>()
 
+// Подключение в компонент хранилища (корзина)
 const userCart = cartStore()
 </script>
 
 <template>
+	<!-- Карточка товара (в корзине) -->
 	<article class="cart-card">
+		<!-- Значок со скидкой -->
 		<span class="cart-card__discount" v-if="props.discount !== 0">
 			-{{ props.discount }}%
 		</span>
 
+		<!-- Изображение товара -->
 		<img
 			class="cart-card__image"
 			:src="props.image"
 			:alt="`${props.title} Banner`"
 		/>
 
+		<!-- Блок текстовой информации о товаре -->
 		<div class="text-info">
+			<!-- Название товара -->
 			<h3 class="cart-card__heading">{{ props.title }}</h3>
+
+			<!-- Размер -->
 			<p class="cart-card__size">
 				Size: <span>{{ props.size }}</span>
 			</p>
+
+			<!-- Цена товара (Со скидкой, если она есть) -->
 			<p class="cart-card__price">
 				{{
 					props.discount !== 0
@@ -40,14 +53,19 @@ const userCart = cartStore()
 				}}
 				<span className="cart-card__currency">usd</span>
 			</p>
+
+			<!-- Блок кнопок -->
 			<div class="cart-card__buttons">
-				<RouterLink
+				<!-- Кнопка для перехода на страницу товара -->
+				<router-link
 					class="btn"
 					:to="`product/${props.id}`"
 					title="Go to this product page"
 				>
 					More Details
-				</RouterLink>
+				</router-link>
+
+				<!-- Кнопка для удаления товара из корзины -->
 				<button
 					class="btn"
 					@click="userCart.removeOneSize(props.id, props.size)"

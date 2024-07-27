@@ -1,6 +1,8 @@
+// Импорты
 import { defineStore } from "pinia"
 import { computed, ref } from "vue"
 
+// Типизация товара
 export interface ICard {
 	id: number
 	title: string
@@ -12,11 +14,13 @@ export interface ICard {
 	sizes: number[]
 }
 
+// Типизация карточки для блока преимуществ
 interface IAdvantages {
 	briefly: string
 	details: string
 }
 
+// Массив всех товаров
 const cards: ICard[] = [
 	{
 		id: 1,
@@ -108,6 +112,7 @@ const cards: ICard[] = [
 	}
 ]
 
+// Массив преимуществ
 const adv: IAdvantages[] = [
 	{
 		briefly: "Quality",
@@ -126,29 +131,36 @@ const adv: IAdvantages[] = [
 	}
 ]
 
+// Создание и экспорт хранилища (внутренние данные)
 export const siteDataStore = defineStore("siteData", () => {
+	// Объявление состояний (все товары, все преимущества, товар в модальном окне (статус модального окна))
 	const products = ref<ICard[]>(cards)
 	const advantages = ref<IAdvantages[]>(adv)
 	const modal = ref<"Hide" | ICard>("Hide")
 
+	// Геттер со всеми товарами, у которых есть скидка
 	const salesProducts = computed(() =>
 		products.value.filter(product => product.discount !== 0)
 	)
 
+	// Геттер со всеми популярными товарами
 	const popularProducts = computed(() =>
 		products.value.filter(product => product.isPopular)
 	)
 
+	// Метод для закрытия модального окна
 	function closeModal() {
 		modal.value = "Hide"
 	}
 
+	// Метод для открытия модального окна и вывод в него товара
 	function setModal(id: number) {
 		const product = products.value.find(item => item.id === id)
 
 		if (product) modal.value = product
 	}
 
+	// "Экспорт" всех состояний, геттеров и методов
 	return {
 		products,
 		advantages,

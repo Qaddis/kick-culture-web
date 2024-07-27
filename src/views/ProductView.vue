@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Импорты
 import { computed, onMounted, ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import ProductCard from "../components/ProductCard.vue"
@@ -8,21 +9,27 @@ import { cartStore } from "../stores/CartStore"
 import type { ICard } from "../stores/DataStore"
 import { siteDataStore } from "../stores/DataStore"
 
+// Тип для статуса страницы - есть такой продукт, нет его или страница ещё загружается
 type StateType = ICard | "Loading" | "None"
 
-const router = useRouter()
+// Получение информации о текущем роуте и подключение в компонент "роутера"
 const route = useRoute()
+const router = useRouter()
 
+// Функция для возвращения на страницу всех товаров
 const goBack = (): void => {
 	router.push("/products")
 }
 
-const siteData = siteDataStore()
+// Подключение в компонент хранилищ (корзина и внутренние данные)
 const userCart = cartStore()
+const siteData = siteDataStore()
 
+// Объявление состояний (товар (статус страницы товара) и выбранные размеры)
 const product = ref<StateType>("Loading")
 const selectedSizes = ref<number[]>([])
 
+// Функция для получения продукта (из параметров роута) и обновления статуса страницы роут
 const getProduct = (): void => {
 	product.value = "Loading"
 
@@ -35,6 +42,7 @@ const getProduct = (): void => {
 	} else product.value = "None"
 }
 
+// Получение всех размеров этого товара в корзине
 const sizesInCart = computed<number[]>((): number[] => {
 	if (product.value !== "Loading" && product.value !== "None") {
 		const cartSizes = userCart.cart.find(
@@ -46,12 +54,15 @@ const sizesInCart = computed<number[]>((): number[] => {
 	} else return []
 })
 
+// Получение схожих или популярны товаров для составления списка рекомендаций
 const similar = computed<ICard[]>((): ICard[] => {
 	let similarProducts: ICard[] = []
 
 	if (product.value !== "None" && product.value !== "Loading") {
+		// Получаем линейку, из которой взята данная модель
 		const shoeLine = product.value.title.split(" ")[1]
 
+		// Ищем другие модели из этой же линейки
 		for (let i = 0; i < siteData.products.length; i++) {
 			let productsItem = siteData.products[i]
 
@@ -64,6 +75,7 @@ const similar = computed<ICard[]>((): ICard[] => {
 			}
 		}
 
+		// В случае, если не находим другие модели из этой линейки или и мало, добавляем популярные товары
 		for (let i = 0; i < siteData.popularProducts.length; i++) {
 			let productsItem = siteData.popularProducts[i]
 
@@ -80,6 +92,7 @@ const similar = computed<ICard[]>((): ICard[] => {
 	return similarProducts
 })
 
+// Наблюдение за изменением списка размеров этого товара в корзине и обновление списка выбранных пользователем товаров
 watch(
 	() => sizesInCart.value,
 	() => {
@@ -87,6 +100,7 @@ watch(
 	}
 )
 
+// Наблюдение за изменениями в роуте и дальнейшее обновление статуса страницы
 watch(
 	() => route.params.id,
 	() => {
@@ -94,11 +108,14 @@ watch(
 	}
 )
 
+// Получение продукта по параметру роута при загрузке компонента
 onMounted(getProduct)
 </script>
 
 <template>
+	<!-- Страница товара -->
 	<section class="product">
+		<!-- Если идёт загрузка -->
 		<div v-if="product === 'Loading'" class="wrapper loading">
 			<svg>
 				<use xlink:href="#loading-svg"></use>
@@ -107,17 +124,20 @@ onMounted(getProduct)
 			<h2>Loading...<br />Please, wait</h2>
 		</div>
 
+		<!-- Если продукт не найден -->
 		<div v-else-if="product === 'None'" class="wrapper product-not-found">
 			<h2>Product not found</h2>
 
-			<GradientButton
+			<gradient-button
 				@click="goBack"
 				title='Go to "Products" page'
 				label="Go back"
 			/>
 		</div>
 
+		<!-- Если продукт найден -->
 		<div v-else class="wrapper product-found">
+			<!-- Кнопка для возврата на страницу со всеми продуктами -->
 			<button title='Go to "Products" page' @click="goBack" class="back-btn">
 				<svg>
 					<use xlink:href="#back-svg"></use>
@@ -125,15 +145,20 @@ onMounted(getProduct)
 				<span>Go back</span>
 			</button>
 
+			<!-- Полная карточка товара -->
 			<article class="product-card">
+				<!-- Значок со скидкой -->
 				<span v-if="product.discount !== 0" class="sale_badge">
 					-{{ product.discount }}%
 				</span>
 
+				<!-- Изображение товара -->
 				<img :src="product.image" :alt="`${product.title} Banner`" />
 
 				<div>
+					<!-- Название товара -->
 					<h2>
+						<!-- Значок "Популярный товар" -->
 						<span
 							v-if="product.isPopular"
 							title="This product is a bestseller"
@@ -143,11 +168,15 @@ onMounted(getProduct)
 						</span>
 						{{ product.title }}
 					</h2>
+
+					<!-- Описание товара -->
 					<p>{{ product.description }}</p>
 				</div>
 
+				<!-- Подсказка (выбор размера) -->
 				<p class="hint">Choose size:</p>
 
+				<!-- Список все доступных размеров товара -->
 				<div class="sizes">
 					<div class="checkbox-container" v-for="size in product.sizes">
 						<input
@@ -168,8 +197,12 @@ onMounted(getProduct)
 					</div>
 				</div>
 
+				<!-- Цена товара (если есть скидка) -->
 				<div style="margin-top: 10px" v-if="product.discount !== 0">
+					<!-- Старая цена (цена без скидки) -->
 					<span class="old_price">{{ product.price }}</span>
+
+					<!-- Цена со скидкой -->
 					<span class="current_price">
 						{{
 							(
@@ -181,6 +214,7 @@ onMounted(getProduct)
 					<span class="currency">usd</span>
 				</div>
 
+				<!-- Цена товара (без скидки) -->
 				<div style="margin-top: 10px" v-else>
 					<span class="current_price">
 						{{ product.price }}
@@ -188,7 +222,8 @@ onMounted(getProduct)
 					<span class="currency">usd</span>
 				</div>
 
-				<GradientButton
+				<!-- Кнопка для добавления товара в корзину -->
+				<gradient-button
 					v-if="sizesInCart.length === 0"
 					@click="userCart.addToCart(product.id, selectedSizes)"
 					label="Add to cart"
@@ -199,13 +234,17 @@ onMounted(getProduct)
 					"
 					:disabled="selectedSizes.length === 0"
 				/>
-				<GradientButton
+
+				<!-- Кнопка для удаления товара из корзины -->
+				<gradient-button
 					v-else-if="sizesInCart.length > 0 && selectedSizes.length === 0"
 					@click="userCart.removeFromCart(product.id)"
 					label="Remove from cart"
 					title="Remove this pair from cart"
 				/>
-				<GradientButton
+
+				<!-- Неактивная кнопка (если товар уже есть в корзине и выбранные пользователем размеры совпадают с размерами в корзине) -->
+				<gradient-button
 					v-else-if="
 						sizesInCart.length > 0 &&
 						selectedSizes.sort((a, b) => a - b) === sizesInCart
@@ -214,7 +253,9 @@ onMounted(getProduct)
 					title="The selected sizes are already in the basket"
 					disabled
 				/>
-				<GradientButton
+
+				<!-- Кнопка для изменения выбранных размеров товара в корзине -->
+				<gradient-button
 					v-else-if="
 						sizesInCart.length > 0 &&
 						selectedSizes.sort((a, b) => a - b) !== sizesInCart
@@ -225,11 +266,13 @@ onMounted(getProduct)
 				/>
 			</article>
 
+			<!-- Список рекомендаций -->
 			<div class="similar">
-				<Heading text="Maybe you'll like it 👀" />
+				<heading text="Maybe you'll like it 👀" />
 
+				<!-- Товары из списка рекомендаций -->
 				<div class="container">
-					<ProductCard
+					<product-card
 						v-for="item in similar"
 						:id="item.id"
 						:title="item.title"
