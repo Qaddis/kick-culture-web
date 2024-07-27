@@ -1,8 +1,21 @@
 <script setup lang="ts">
+import { computed } from "vue"
 import { RouterLink, useRoute, useRouter } from "vue-router"
+import { cartStore } from "../stores/CartStore"
 
 const router = useRouter()
 const route = useRoute()
+
+const userCart = cartStore()
+
+const cartSize = computed<number>((): number => {
+	let size: number = 0
+	userCart.cart.forEach(cartItem => {
+		size += cartItem.sizes.length
+	})
+
+	return size
+})
 
 const goToCartPage = (): void => {
 	router.push("/cart")
@@ -54,6 +67,10 @@ const goToCartPage = (): void => {
 					<svg>
 						<use xlink:href="#cart-svg"></use>
 					</svg>
+
+					<span v-if="cartSize > 0" class="cart-size-badge">
+						{{ cartSize }}
+					</span>
 				</button>
 			</nav>
 		</div>
@@ -154,6 +171,7 @@ const goToCartPage = (): void => {
 }
 
 .cart-button {
+	position: relative;
 	background: var(--gradient);
 	padding: 5px 8px;
 	border-radius: 50%;
@@ -173,6 +191,22 @@ const goToCartPage = (): void => {
 	&:active {
 		translate: 0 3px;
 		opacity: 0.75;
+	}
+
+	.cart-size-badge {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.65rem;
+		height: 1.65rem;
+		background-color: var(--add);
+		border-radius: 50%;
+		font-size: 1rem;
+		color: var(--light);
+
+		position: absolute;
+		bottom: -0.35rem;
+		right: -0.35rem;
 	}
 }
 </style>

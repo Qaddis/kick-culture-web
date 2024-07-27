@@ -19,6 +19,18 @@ const sizesInCart = computed<number[]>((): number[] => {
 	} else return []
 })
 
+function handleButtonClick(action: "add" | "remove" | "change"): void {
+	if (product.value !== "Hide") {
+		if (action === "add")
+			userCart.addToCart(product.value.id, selectedSizes.value)
+		else if (action === "change")
+			userCart.changeSizes(product.value.id, selectedSizes.value)
+		else userCart.removeFromCart(product.value.id)
+	}
+
+	siteData.closeModal()
+}
+
 watch(
 	() => sizesInCart.value,
 	() => {
@@ -39,6 +51,14 @@ watch(
 
 <template>
 	<div @click="siteData.closeModal" v-if="product !== `Hide`" class="overlay">
+		<button
+			class="close-btn"
+			@click="siteData.closeModal"
+			title="Close the size selection window"
+		>
+			✕
+		</button>
+
 		<section @click="e => e.stopPropagation()" class="product-modal">
 			<h2 class="product-modal__title">
 				<span
@@ -92,7 +112,7 @@ watch(
 
 			<GradientButton
 				v-if="sizesInCart.length === 0"
-				@click="userCart.addToCart(product.id, selectedSizes)"
+				@click="handleButtonClick('add')"
 				label="Add to cart"
 				:title="
 					selectedSizes.length !== 0
@@ -103,7 +123,7 @@ watch(
 			/>
 			<GradientButton
 				v-else-if="sizesInCart.length > 0 && selectedSizes.length === 0"
-				@click="userCart.removeFromCart(product.id)"
+				@click="handleButtonClick('remove')"
 				label="Remove from cart"
 				title="Remove this pair from cart"
 			/>
@@ -121,7 +141,7 @@ watch(
 					sizesInCart.length > 0 &&
 					selectedSizes.sort((a, b) => a - b) !== sizesInCart
 				"
-				@click="userCart.changeSizes(product.id, selectedSizes)"
+				@click="handleButtonClick('change')"
 				label="Change sizes"
 				title="Change sizes already added to cart"
 			/>
@@ -143,6 +163,30 @@ watch(
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	.close-btn {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		z-index: 11;
+
+		font-size: 2rem;
+		color: var(--light);
+		padding: 0 10px 3px;
+		border-radius: 50%;
+
+		transition-property: filter, translate, opacity;
+		transition-duration: 0.25s;
+
+		&:hover {
+			filter: drop-shadow(0 0 5px var(--light));
+		}
+
+		&:active {
+			opacity: 0.75;
+			translate: 0 2px;
+		}
+	}
 }
 
 .product-modal {
