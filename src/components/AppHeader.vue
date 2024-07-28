@@ -30,14 +30,12 @@ const goToCartPage = (): void => {
 <template>
 	<header class="header">
 		<div class="wrapper">
-			<!-- Логотип сайта (название) -->
 			<h1 class="logo">
 				<router-link title='Go to "Home" page' to="/">
 					Kick Culture
 				</router-link>
 			</h1>
 
-			<!-- Панель навигации по сайту -->
 			<nav class="nav">
 				<router-link
 					:class="{
@@ -68,7 +66,6 @@ const goToCartPage = (): void => {
 					About
 				</router-link>
 
-				<!-- Кнопка для перехода в корзину -->
 				<button
 					@click="goToCartPage"
 					title='Go to "Cart" page'
@@ -78,7 +75,6 @@ const goToCartPage = (): void => {
 						<use xlink:href="#cart-svg"></use>
 					</svg>
 
-					<!-- Значок с кол-вом товаров в корзине -->
 					<transition mode="default" name="cart-badge">
 						<span v-if="cartSize > 0" class="cart-size-badge">
 							{{ cartSize }}

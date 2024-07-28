@@ -1,6 +1,8 @@
 <script setup lang="ts">
+// Импорт типа для CSS-свойств
 import type { CSSProperties } from "vue"
 
+// Типизация пропсов
 interface IButtonProps {
 	label: string
 	title?: string
@@ -8,9 +10,11 @@ interface IButtonProps {
 	style?: CSSProperties
 }
 
+// Объявление пропсов и эмита @click
 const props = defineProps<IButtonProps>()
 const emits = defineEmits<{ click: [] }>()
 
+// Обработка нажатия и вызов эмита
 const handleClick = () => {
 	emits("click")
 }

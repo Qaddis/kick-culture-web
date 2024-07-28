@@ -25,20 +25,15 @@ const toCart = (): void => {
 </script>
 
 <template>
-	<!-- Карточка товара -->
-	<article class="card">
-		<!-- Значок со скидкой -->
+	<article class="card" v-motion-fade-visible-once>
 		<span class="discount" v-if="props.discount !== 0">
 			-{{ props.discount }}%
 		</span>
 
-		<!-- Изображение товара -->
 		<img :src="props.image" :alt="`${props.title} Banner`" class="image" />
 
-		<!-- Название товара -->
 		<h3 class="heading">{{ props.title }}</h3>
 
-		<!-- Цена на товар (Со скидкой, если она есть) -->
 		<p class="price">
 			{{
 				props.discount !== 0
@@ -48,9 +43,7 @@ const toCart = (): void => {
 			<span class="currency">usd</span>
 		</p>
 
-		<!-- Блок кнопок -->
 		<div class="buttons">
-			<!-- Кнопка для перехода на страницу товара -->
 			<router-link
 				class="btn"
 				:to="`/product/${props.id}`"
@@ -59,7 +52,6 @@ const toCart = (): void => {
 				More Details
 			</router-link>
 
-			<!-- Кнопка для открытия модального окна (выбор нужных размеров и их добавление в корзину) -->
 			<button title="Add this product to cart" @click="toCart" class="btn">
 				+
 			</button>

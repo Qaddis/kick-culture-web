@@ -77,12 +77,10 @@ const prices = computed<PricesType>((): PricesType => {
 </script>
 
 <template>
-	<!-- Страница "Корзина" -->
 	<section class="cart">
 		<heading text="Cart 🛒" />
 
 		<div :class="{ wrapper: true, '--empty': cart.length == 0 }">
-			<!-- Список всех товаров в корзине -->
 			<div v-if="cart.length > 0" class="cards">
 				<cart-card
 					v-for="item in cart"
@@ -95,11 +93,9 @@ const prices = computed<PricesType>((): PricesType => {
 				/>
 			</div>
 
-			<!-- Блок с сообщением, если корзина пустая -->
 			<div v-else class="empty">
 				<h3>It's empty here for now... 😭</h3>
 
-				<!-- Кнопка для перехода на страницу всех товаров -->
 				<gradient-button
 					@click="router.push('/products')"
 					label="Let's fix this!"
@@ -107,19 +103,15 @@ const prices = computed<PricesType>((): PricesType => {
 				/>
 			</div>
 
-			<!-- Информация о корзине (счёт) -->
 			<div v-if="cart.length > 0" class="bill">
 				<div class="row">
-					<!-- Размер корзины (кол-во товаров в корзине) -->
 					<p class="basket-size">
 						Products in cart: <span>{{ cart.length }}</span>
 					</p>
 
-					<!-- Цена всех товаров в корзине -->
 					<p class="total-price">
 						Total:
 
-						<!-- Итоговая цена (цена со скидками) -->
 						<span
 							v-if="prices.fullPrice !== prices.totalPrice"
 							class="full-price"
@@ -127,17 +119,15 @@ const prices = computed<PricesType>((): PricesType => {
 							{{ prices.fullPrice }}
 						</span>
 
-						<!-- Полная цена (цена без скидок) -->
 						<span class="value">{{ prices.totalPrice }}</span>
 						<span class="currency"> usd</span>
 					</p>
 				</div>
-				<!-- Блок с итоговой скидкой -->
+
 				<div
 					v-if="prices.fullPrice !== prices.totalPrice"
 					class="total-discount"
 				>
-					<!-- Итоговая скидка -->
 					<p>
 						Total discount: <span>-{{ prices.totalDiscount }}%</span>
 					</p>

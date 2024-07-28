@@ -58,9 +58,7 @@ watch(
 </script>
 
 <template>
-	<!-- Оверлей, перекрывающий весь доступный экран -->
 	<div @click="siteData.closeModal" v-if="product !== `Hide`" class="overlay">
-		<!-- Кнопка для закрытия модального окна -->
 		<button
 			class="close-btn"
 			@click="siteData.closeModal"
@@ -69,11 +67,8 @@ watch(
 			✕
 		</button>
 
-		<!-- Модальное окно -->
 		<section @click="e => e.stopPropagation()" class="product-modal">
-			<!-- Название продукта -->
 			<h2 class="product-modal__title">
-				<!-- Значок "Популярный товар" -->
 				<span
 					v-if="product.isPopular"
 					title="This product is a bestseller"
@@ -84,10 +79,8 @@ watch(
 				{{ product.title }}
 			</h2>
 
-			<!-- Подсказка (выбор размеров) -->
 			<p class="hint">Choose size:</p>
 
-			<!-- Список все доступных размеров -->
 			<div class="product-modal__sizes">
 				<div class="checkbox-container" v-for="size in product.sizes">
 					<input
@@ -108,12 +101,9 @@ watch(
 				</div>
 			</div>
 
-			<!-- Цена на товар (если есть скидка) -->
 			<div v-if="product.discount !== 0" class="product-modal__price">
-				<!-- Старая цена (цена без скидки) -->
 				<span class="old_price">{{ product.price }}</span>
 
-				<!-- Цена со скидкой -->
 				<span class="current_price">
 					{{
 						(product.price - (product.price * product.discount) / 100).toFixed(
@@ -124,13 +114,11 @@ watch(
 				<span class="currency">usd</span>
 			</div>
 
-			<!-- Цена на товар (если скидки нет) -->
 			<div v-else class="product-modal__price">
 				<span class="current_price">{{ product.price }}</span>
 				<span class="currency">usd</span>
 			</div>
 
-			<!-- Кнопка для добавления товара в корзину -->
 			<gradient-button
 				v-if="sizesInCart.length === 0"
 				@click="handleButtonClick('add')"
@@ -143,7 +131,6 @@ watch(
 				:disabled="selectedSizes.length === 0"
 			/>
 
-			<!-- Кнопка для удаления товара из корзины -->
 			<gradient-button
 				v-else-if="sizesInCart.length > 0 && selectedSizes.length === 0"
 				@click="handleButtonClick('remove')"
@@ -151,7 +138,6 @@ watch(
 				title="Remove this pair from cart"
 			/>
 
-			<!-- Неактивная кнопка (если товар уже есть в корзине и выбранные пользователем размеры совпадают с размерами в корзине) -->
 			<gradient-button
 				v-else-if="
 					sizesInCart.length > 0 &&
@@ -162,7 +148,6 @@ watch(
 				disabled
 			/>
 
-			<!-- Кнопка для изменения выбранных размеров товара в корзине -->
 			<gradient-button
 				v-else-if="
 					sizesInCart.length > 0 &&

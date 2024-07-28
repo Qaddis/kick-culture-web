@@ -1,10 +1,10 @@
 // Импорт нужных модулей
 import { createRouter, createWebHistory } from "vue-router"
 
-// Импорт всех страницы
+// Импорт всех страниц
 import AboutView from "./views/AboutView.vue"
 import CartView from "./views/CartView.vue"
-import MainView from "./views/MainView.vue"
+import HomeView from "./views/HomeView.vue"
 import ProductsView from "./views/ProductsView.vue"
 import ProductView from "./views/ProductView.vue"
 
@@ -14,8 +14,8 @@ export default createRouter({
 	routes: [
 		{
 			path: "/",
-			name: "main",
-			component: MainView
+			name: "home",
+			component: HomeView
 		},
 		{
 			path: "/products",

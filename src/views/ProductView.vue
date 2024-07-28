@@ -113,9 +113,7 @@ onMounted(getProduct)
 </script>
 
 <template>
-	<!-- Страница товара -->
 	<section class="product">
-		<!-- Если идёт загрузка -->
 		<div v-if="product === 'Loading'" class="wrapper loading">
 			<svg>
 				<use xlink:href="#loading-svg"></use>
@@ -124,7 +122,6 @@ onMounted(getProduct)
 			<h2>Loading...<br />Please, wait</h2>
 		</div>
 
-		<!-- Если продукт не найден -->
 		<div v-else-if="product === 'None'" class="wrapper product-not-found">
 			<h2>Product not found</h2>
 
@@ -135,9 +132,7 @@ onMounted(getProduct)
 			/>
 		</div>
 
-		<!-- Если продукт найден -->
 		<div v-else class="wrapper product-found">
-			<!-- Кнопка для возврата на страницу со всеми продуктами -->
 			<button title='Go to "Products" page' @click="goBack" class="back-btn">
 				<svg>
 					<use xlink:href="#back-svg"></use>
@@ -145,20 +140,15 @@ onMounted(getProduct)
 				<span>Go back</span>
 			</button>
 
-			<!-- Полная карточка товара -->
 			<article class="product-card">
-				<!-- Значок со скидкой -->
 				<span v-if="product.discount !== 0" class="sale_badge">
 					-{{ product.discount }}%
 				</span>
 
-				<!-- Изображение товара -->
 				<img :src="product.image" :alt="`${product.title} Banner`" />
 
 				<div>
-					<!-- Название товара -->
 					<h2>
-						<!-- Значок "Популярный товар" -->
 						<span
 							v-if="product.isPopular"
 							title="This product is a bestseller"
@@ -169,14 +159,11 @@ onMounted(getProduct)
 						{{ product.title }}
 					</h2>
 
-					<!-- Описание товара -->
 					<p>{{ product.description }}</p>
 				</div>
 
-				<!-- Подсказка (выбор размера) -->
 				<p class="hint">Choose size:</p>
 
-				<!-- Список все доступных размеров товара -->
 				<div class="sizes">
 					<div class="checkbox-container" v-for="size in product.sizes">
 						<input
@@ -197,12 +184,9 @@ onMounted(getProduct)
 					</div>
 				</div>
 
-				<!-- Цена товара (если есть скидка) -->
 				<div style="margin-top: 10px" v-if="product.discount !== 0">
-					<!-- Старая цена (цена без скидки) -->
 					<span class="old_price">{{ product.price }}</span>
 
-					<!-- Цена со скидкой -->
 					<span class="current_price">
 						{{
 							(
@@ -214,7 +198,6 @@ onMounted(getProduct)
 					<span class="currency">usd</span>
 				</div>
 
-				<!-- Цена товара (без скидки) -->
 				<div style="margin-top: 10px" v-else>
 					<span class="current_price">
 						{{ product.price }}
@@ -222,7 +205,6 @@ onMounted(getProduct)
 					<span class="currency">usd</span>
 				</div>
 
-				<!-- Кнопка для добавления товара в корзину -->
 				<gradient-button
 					v-if="sizesInCart.length === 0"
 					@click="userCart.addToCart(product.id, selectedSizes)"
@@ -235,7 +217,6 @@ onMounted(getProduct)
 					:disabled="selectedSizes.length === 0"
 				/>
 
-				<!-- Кнопка для удаления товара из корзины -->
 				<gradient-button
 					v-else-if="sizesInCart.length > 0 && selectedSizes.length === 0"
 					@click="userCart.removeFromCart(product.id)"
@@ -243,7 +224,6 @@ onMounted(getProduct)
 					title="Remove this pair from cart"
 				/>
 
-				<!-- Неактивная кнопка (если товар уже есть в корзине и выбранные пользователем размеры совпадают с размерами в корзине) -->
 				<gradient-button
 					v-else-if="
 						sizesInCart.length > 0 &&
@@ -254,7 +234,6 @@ onMounted(getProduct)
 					disabled
 				/>
 
-				<!-- Кнопка для изменения выбранных размеров товара в корзине -->
 				<gradient-button
 					v-else-if="
 						sizesInCart.length > 0 &&
@@ -266,11 +245,9 @@ onMounted(getProduct)
 				/>
 			</article>
 
-			<!-- Список рекомендаций -->
 			<div class="similar">
 				<heading text="Maybe you'll like it 👀" />
 
-				<!-- Товары из списка рекомендаций -->
 				<div class="container">
 					<product-card
 						v-for="item in similar"

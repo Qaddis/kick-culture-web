@@ -1,16 +1,28 @@
 <script setup lang="ts">
-import { CSSProperties } from "vue"
+// Импорт типа для CSS-свойств
+import type { CSSProperties } from "vue"
 
+// Типизация пропсов
 interface IProps {
 	text: string
 	style?: CSSProperties
 }
 
+// Объявление пропсов
 const props = defineProps<IProps>()
 </script>
 
 <template>
-	<h2 :style="props.style" class="heading">{{ props.text }}</h2>
+	<h2
+		class="heading"
+		:style="props.style"
+		v-motion
+		:initial="{ opacity: 0, y: 20 }"
+		:visible-once="{ opacity: 1, y: 0 }"
+		:duration="350"
+	>
+		{{ props.text }}
+	</h2>
 </template>
 
 <style scoped lang="scss">

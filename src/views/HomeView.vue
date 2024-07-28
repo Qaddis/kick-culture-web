@@ -23,22 +23,17 @@ sales.length = 3
 </script>
 
 <template>
-	<!-- Главная страница -->
 	<div>
-		<!-- Раздел "Лендинг" -->
 		<section class="landing">
 			<div class="wrapper">
-				<!-- Название сайта -->
 				<h2 class="landing__h2">Kick Culture</h2>
 
-				<!-- Лозунг -->
 				<p class="landing__p">
 					Walk in <span>style</span>, breathe in <span>culture</span>:
 					<br />
 					<span>Kick Culture</span> - in every pair, there&apos;s a history!
 				</p>
 
-				<!-- Кнопка для перехода на страницу всех товаров -->
 				<gradient-button
 					@click="goTo('/products')"
 					label="Shop now!"
@@ -48,7 +43,6 @@ sales.length = 3
 			</div>
 		</section>
 
-		<!-- Бегущая строка (с сообщением о скидках) -->
 		<marquee
 			class="ticker"
 			scrollamount="8"
@@ -58,12 +52,10 @@ sales.length = 3
 			🤩 Discounts up to 20%! 🤩
 		</marquee>
 
-		<!-- Раздел "Скидки" -->
 		<section class="sales">
 			<div class="wrapper">
 				<heading text="Sales" />
 
-				<!-- Список товаров со скидками -->
 				<div class="cards">
 					<product-card
 						v-for="item in sales"
@@ -83,14 +75,19 @@ sales.length = 3
 			</div>
 		</section>
 
-		<!-- Раздел "Преимущества" -->
 		<section class="advantages">
 			<div class="wrapper">
 				<heading text="Why us?" />
 
-				<!-- Список преимуществ -->
 				<ul class="advantages__ul">
-					<li v-for="item in store.advantages" class="advantages__li">
+					<li
+						v-for="item in store.advantages"
+						class="advantages__li"
+						v-motion
+						:initial="{ rotateX: '90deg' }"
+						:visible="{ rotateX: '0deg' }"
+						:duration="350"
+					>
 						<h3>{{ item.briefly }}</h3>
 						<p>{{ item.details }}</p>
 					</li>

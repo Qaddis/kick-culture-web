@@ -9,16 +9,18 @@ const store = siteDataStore()
 </script>
 
 <template>
-	<!-- Страница со всеми товарами -->
 	<div class="products">
 		<div class="wrapper">
-			<!-- Раздел "Популярные товары" -->
 			<section class="products__best">
-				<h2>
+				<h2
+					v-motion
+					:initial="{ opacity: 0, y: 20 }"
+					:visible-once="{ opacity: 1, y: 0 }"
+					:duration="350"
+				>
 					<span>The best</span>
 				</h2>
 
-				<!-- Список популярных товаров -->
 				<div class="cards">
 					<product-card
 						v-for="item in store.popularProducts"
@@ -31,11 +33,9 @@ const store = siteDataStore()
 				</div>
 			</section>
 
-			<!-- Раздел "Все товары" -->
 			<section class="products__all">
 				<heading text="All products" />
 
-				<!-- Список всех товаров -->
 				<div class="cards">
 					<product-card
 						v-for="item in store.products"

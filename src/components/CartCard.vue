@@ -1,5 +1,6 @@
 <script setup lang="ts">
-// Импорт хранилища (корзина)
+// Импорты
+import { ref } from "vue"
 import { cartStore } from "../stores/CartStore"
 
 // Типизация пропсов
@@ -17,34 +18,39 @@ const props = defineProps<ICardProps>()
 
 // Подключение в компонент хранилища (корзина)
 const userCart = cartStore()
+
+// Состояние карточки товара
+const isShow = ref<boolean>(true)
+
+// Функция для удаления одного размера из корзины
+const removeSize = (): void => {
+	isShow.value = false
+
+	setTimeout(() => {
+		userCart.removeOneSize(props.id, props.size)
+	}, 350)
+}
 </script>
 
 <template>
-	<!-- Карточка товара (в корзине) -->
-	<article class="cart-card">
-		<!-- Значок со скидкой -->
+	<article :class="{ 'cart-card': true, '--show': isShow }">
 		<span class="cart-card__discount" v-if="props.discount !== 0">
 			-{{ props.discount }}%
 		</span>
 
-		<!-- Изображение товара -->
 		<img
 			class="cart-card__image"
 			:src="props.image"
 			:alt="`${props.title} Banner`"
 		/>
 
-		<!-- Блок текстовой информации о товаре -->
 		<div class="text-info">
-			<!-- Название товара -->
 			<h3 class="cart-card__heading">{{ props.title }}</h3>
 
-			<!-- Размер -->
 			<p class="cart-card__size">
 				Size: <span>{{ props.size }}</span>
 			</p>
 
-			<!-- Цена товара (Со скидкой, если она есть) -->
 			<p class="cart-card__price">
 				{{
 					props.discount !== 0
@@ -54,9 +60,7 @@ const userCart = cartStore()
 				<span className="cart-card__currency">usd</span>
 			</p>
 
-			<!-- Блок кнопок -->
 			<div class="cart-card__buttons">
-				<!-- Кнопка для перехода на страницу товара -->
 				<router-link
 					class="btn"
 					:to="`product/${props.id}`"
@@ -65,10 +69,9 @@ const userCart = cartStore()
 					More Details
 				</router-link>
 
-				<!-- Кнопка для удаления товара из корзины -->
 				<button
 					class="btn"
-					@click="userCart.removeOneSize(props.id, props.size)"
+					@click="removeSize"
 					title="Remove this product from cart"
 				>
 					✕
@@ -91,6 +94,16 @@ const userCart = cartStore()
 
 	position: relative;
 	overflow: hidden;
+
+	translate: 0 20%;
+	opacity: 0;
+	transition-property: translate, opacity;
+	transition-duration: 0.35s;
+
+	&.--show {
+		translate: 0 0;
+		opacity: 1;
+	}
 
 	&::before {
 		content: "";
@@ -186,5 +199,18 @@ const userCart = cartStore()
 			}
 		}
 	}
+}
+
+.cart-card-enter-from,
+.cart-card-leave-to {
+	opacity: 0;
+}
+
+.cart-card-enter-active {
+	transition: opacity 0.5s ease-out;
+}
+
+.cart-card-leave-active {
+	transition: opacity 0.5s ease-in;
 }
 </style>

@@ -16,7 +16,9 @@ import ProductModal from "./components/ProductModal.vue"
 		</router-view>
 	</main>
 
-	<product-modal />
+	<transition name="product-modal" mode="default">
+		<product-modal />
+	</transition>
 
 	<app-footer />
 </template>
@@ -27,7 +29,7 @@ import ProductModal from "./components/ProductModal.vue"
 	min-height: calc(100vh - 96px);
 }
 
-/* Route transitions */
+/* Page transitions */
 .route-enter-from,
 .route-leave-to {
 	opacity: 0;
@@ -37,7 +39,21 @@ import ProductModal from "./components/ProductModal.vue"
 	transition: opacity 0.5s ease-out;
 }
 
-.router-leave-active {
+.route-modal-leave-active {
 	transition: opacity 0.5s ease-in;
+}
+
+/* Product modal transitions */
+.product-modal-enter-from,
+.product-modal-leave-to {
+	opacity: 0;
+}
+
+.product-modal-enter-active {
+	transition: opacity 0.25s ease-out;
+}
+
+.product-modal-leave-active {
+	transition: opacity 0.25s ease-in;
 }
 </style>
